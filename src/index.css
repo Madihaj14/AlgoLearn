@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans transition-colors duration-300 ease-in-out;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none;
+  }
+  
+  .btn-primary {
+    @apply dark:bg-dark-primary dark:text-dark-background dark:hover:shadow-neon
+           bg-light-primary text-white hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply dark:bg-transparent dark:text-dark-primary dark:border-dark-primary dark:hover:bg-dark-primary/10
+           bg-transparent text-light-primary border border-light-primary hover:bg-light-primary/10;
+  }
+  
+  .card {
+    @apply rounded-xl p-6 transition-all duration-300 backdrop-blur-md;
+  }
+  
+  .card-glass {
+    @apply dark:bg-dark-surface/90 dark:border-dark-primary/30 dark:shadow-neon
+           bg-light-surface/90 border border-white/30 shadow-glass;
+  }
+  
+  .cosmic-particle {
+    @apply absolute rounded-full pointer-events-none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply dark:bg-dark-background bg-light-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply dark:bg-dark-primary bg-light-primary rounded-full;
+}
+
+/* Animations for stars and particles */
+.star {
+  @apply absolute rounded-full bg-white;
+}
+
+.planet {
+  @apply absolute rounded-full;
+}
+
+/* Glassmorphism effect */
+.glass {
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
+}
+
+/* Improved dark mode text readability */
+.dark .opacity-80 {
+  @apply opacity-90;
+}
+
+.dark p, .dark span, .dark li {
+  @apply text-white;
+}
+
+/* Bird animation */
+@keyframes fly {
+  0% {
+    transform: translateX(-100%) translateY(0);
+  }
+  50% {
+    transform: translateX(50%) translateY(-20px);
+  }
+  100% {
+    transform: translateX(200%) translateY(0);
+  }
+}
+
+.bird {
+  animation: fly 20s linear infinite;
+}
+
+/* Progress bar animation */
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.progress-animate {
+  animation: progress 1.5s ease-out;
+}
