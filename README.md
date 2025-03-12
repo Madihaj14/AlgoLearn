@@ -7,7 +7,7 @@
 ---
 
 ## 🎥 Sneak Peek  
-<p align="center">
+<p align="left">
   https://algolearn14.vercel.app
 </p>
 
