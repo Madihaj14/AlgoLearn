@@ -8,7 +8,7 @@
 
 ## 🎥 Sneak Peek  
 <p align="center">
-  🔗 <a href="https://algolearn14.vercel.app"><b>Explore AlgoLearn Now! 🚀</b></a>
+  https://algolearn14.vercel.app
 </p>
 
 <p align="center">
