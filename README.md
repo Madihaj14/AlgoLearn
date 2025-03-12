@@ -7,6 +7,8 @@
 ---
 
 ## 🎥 Sneak Peek  
+🚀 **AlgoLearn in Action!** See how algorithms come to life! 👇  
+
 <p align="left">
   https://algolearn14.vercel.app
 </p>
