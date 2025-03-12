@@ -34,10 +34,4 @@
 🔗 **API Integrations:** GPT API, LeetCode/GFG  
 
 ---
-
-## 🚀 Getting Started  
-
-### **1️⃣ Clone the Repository**
-```sh
-git clone https://github.com/yourusername/algo-learn.git
-cd algo-learn
+]
