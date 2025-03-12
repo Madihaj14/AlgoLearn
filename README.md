@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/logo.png" alt="AlgoLearn Logo" width="200">
-</p>
-
 <h1 align="center">🚀 AlgoLearn – Visualizing DSA Like Never Before! 🌟</h1>
 
 <p align="center">
