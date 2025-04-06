@@ -1,4 +1,4 @@
-<h1 align="center">🚀 AlgoLearn – Visualizing DSA Like Never Before! 🌟</h1>
+<h1 align="center">🚀 AlgoLearn – Learning DSA Like Never Before! 🌟</h1>
 
 <p align="center">
   <b>A fun and interactive way to master Data Structures & Algorithms with stunning visualizations! 🎨📊</b>
@@ -7,7 +7,7 @@
 ---
 
 ## 🎥 Sneak Peek  
-🚀 **AlgoLearn in Action!** See how algorithms come to life! 👇  
+🚀 **AlgoLearn is in Action!** See how algorithms come to life! 👇  
 
 <p align="left">
   https://algolearn14.vercel.app
