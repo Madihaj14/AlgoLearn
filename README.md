@@ -28,6 +28,9 @@
 
 ---
 
+
+---
+
 ## 🛠️ Tech Stack  
 ✨ **Frontend:** React, Tailwind CSS  
 🛠️ **Backend:** Django/Flask, PostgreSQL  
