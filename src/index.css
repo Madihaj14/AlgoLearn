@@ -6,21 +6,26 @@
   body {
     @apply font-sans transition-colors duration-300 ease-in-out;
   }
+  
+  /* Improve touch targets for mobile */
+  button, a {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
 }
 
 @layer components {
   .btn {
-    @apply px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none;
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   
   .btn-primary {
-    @apply dark:bg-dark-primary dark:text-dark-background dark:hover:shadow-neon
-           bg-light-primary text-white hover:shadow-md;
+    @apply dark:bg-dark-primary dark:text-dark-background dark:hover:shadow-neon dark:focus:ring-dark-primary
+           bg-light-primary text-white hover:shadow-md focus:ring-light-primary;
   }
   
   .btn-secondary {
-    @apply dark:bg-transparent dark:text-dark-primary dark:border-dark-primary dark:hover:bg-dark-primary/10
-           bg-transparent text-light-primary border border-light-primary hover:bg-light-primary/10;
+    @apply dark:bg-transparent dark:text-dark-primary dark:border-dark-primary dark:hover:bg-dark-primary/10 dark:focus:ring-dark-primary
+           bg-transparent text-light-primary border border-light-primary hover:bg-light-primary/10 focus:ring-light-primary;
   }
   
   .card {
@@ -34,6 +39,14 @@
   
   .cosmic-particle {
     @apply absolute rounded-full pointer-events-none;
+  }
+  
+  /* Line clamp utility for text truncation */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
@@ -102,4 +115,65 @@
 
 .progress-animate {
   animation: progress 1.5s ease-out;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  .container {
+    @apply px-4;
+  }
+  
+  /* Improve touch interactions */
+  .card:hover {
+    @apply transform-none;
+  }
+  
+  .card:active {
+    @apply scale-95;
+  }
+  
+  /* Better spacing for mobile */
+  .btn {
+    @apply px-4 py-3 text-sm;
+  }
+  
+  /* Responsive text sizes */
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+  
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+  
+  h3 {
+    @apply text-lg sm:text-xl;
+  }
+}
+
+/* Focus improvements for accessibility */
+@media (prefers-reduced-motion: no-preference) {
+  .btn:focus {
+    @apply ring-2 ring-offset-2;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-glass {
+    @apply border-2;
+  }
+  
+  .btn {
+    @apply border-2;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

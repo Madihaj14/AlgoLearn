@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Play, Pause, SkipForward, SkipBack, RefreshCw, Code, Settings } from 'lucide-react';
+import { Play, Pause, SkipForward, SkipBack, RefreshCw, Code, Settings, X } from 'lucide-react';
 
 interface VisualizerProps {
   algorithm: string;
@@ -572,7 +572,7 @@ function merge(left, right) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -587,23 +587,21 @@ function merge(left, right) {
         {/* Header */}
         <div className={`p-4 border-b ${theme === 'dark' ? 'border-dark-primary/30' : 'border-light-primary/30'}`}>
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">{getAlgorithmTitle()} Visualization</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">{getAlgorithmTitle()} Visualization</h2>
             <button 
               onClick={onClose}
               className={`p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="h-6 w-6" />
             </button>
           </div>
         </div>
         
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Algorithm Info */}
           <div className="mb-6">
-            <p className="mb-2 opacity-80">{getAlgorithmDescription()}</p>
-            <div className="flex flex-wrap gap-4">
+            <p className="mb-2 opacity-80 text-sm sm:text-base">{getAlgorithmDescription()}</p>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
               <div className="flex items-center">
                 <span className="text-sm font-medium mr-2">Time Complexity:</span>
                 <span className={`text-sm px-2 py-1 rounded-full
@@ -622,18 +620,18 @@ function merge(left, right) {
           </div>
           
           {/* Visualization Area */}
-          <div className={`p-6 rounded-lg mb-6 ${theme === 'dark' ? 'bg-dark-background' : 'bg-light-background'}`}>
-            <div className="flex items-end justify-center h-64 gap-1">
+          <div className={`p-4 sm:p-6 rounded-lg mb-6 ${theme === 'dark' ? 'bg-dark-background' : 'bg-light-background'}`}>
+            <div className="flex items-end justify-center h-48 sm:h-64 gap-1 overflow-x-auto">
               {array.map((value, index) => (
                 <motion.div
                   key={index}
-                  className={`w-12 rounded-t-lg flex items-end justify-center
+                  className={`w-8 sm:w-12 rounded-t-lg flex items-end justify-center flex-shrink-0
                             ${sortedIndices.includes(index) 
-                              ? theme === 'dark' ? 'bg-green-500' : 'bg-green-500' 
+                              ? 'bg-green-500' 
                               : comparingIndices.includes(index)
                                 ? theme === 'dark' ? 'bg-dark-primary' : 'bg-light-primary'
                                 : swappingIndices.includes(index)
-                                  ? theme === 'dark' ? 'bg-red-500' : 'bg-red-500'
+                                  ? 'bg-red-500'
                                   : theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300'}`}
                   style={{ 
                     height: `${(value / maxValue) * 100}%`,
@@ -652,82 +650,86 @@ function merge(left, right) {
           </div>
           
           {/* Controls */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-4 mb-6">
+            {/* Main Controls */}
+            <div className="flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={resetVisualization}
-                className={`p-2 rounded-full
+                className={`p-2 sm:p-3 rounded-full
                           ${theme === 'dark' 
                             ? 'bg-dark-surface hover:bg-dark-primary/20' 
                             : 'bg-light-surface hover:bg-light-primary/20'}`}
               >
-                <RefreshCw size={20} />
+                <RefreshCw size={16} className="sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={stepBackward}
                 disabled={currentStep === 0}
-                className={`p-2 rounded-full
+                className={`p-2 sm:p-3 rounded-full
                           ${currentStep === 0 ? 'opacity-50 cursor-not-allowed' : ''}
                           ${theme === 'dark' 
                             ? 'bg-dark-surface hover:bg-dark-primary/20' 
                             : 'bg-light-surface hover:bg-light-primary/20'}`}
               >
-                <SkipBack size={20} />
+                <SkipBack size={16} className="sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={togglePlay}
-                className={`p-2 rounded-full
+                className={`p-2 sm:p-3 rounded-full
                           ${theme === 'dark' 
                             ? 'bg-dark-primary text-dark-background' 
                             : 'bg-light-primary text-white'}`}
               >
-                {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+                {isPlaying ? <Pause size={16} className="sm:w-5 sm:h-5" /> : <Play size={16} className="sm:w-5 sm:h-5" />}
               </button>
               <button
                 onClick={stepForward}
                 disabled={currentStep === sortingSteps.length - 1}
-                className={`p-2 rounded-full
+                className={`p-2 sm:p-3 rounded-full
                           ${currentStep === sortingSteps.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}
                           ${theme === 'dark' 
                             ? 'bg-dark-surface hover:bg-dark-primary/20' 
                             : 'bg-light-surface hover:bg-light-primary/20'}`}
               >
-                <SkipForward size={20} />
+                <SkipForward size={16} className="sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={generateRandomArray}
-                className={`p-2 rounded-full
+                className={`p-2 sm:p-3 rounded-full
                           ${theme === 'dark' 
                             ? 'bg-dark-surface hover:bg-dark-primary/20' 
                             : 'bg-light-surface hover:bg-light-primary/20'}`}
               >
-                <Settings size={20} />
+                <Settings size={16} className="sm:w-5 sm:h-5" />
               </button>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="flex items-center">
-                <span className="text-sm mr-2">Speed:</span>
-                <input
-                  type="range"
-                  min="0.5"
-                  max="3"
-                  step="0.5"
-                  value={playbackSpeed}
-                  onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))}
-                  className="w-24"
-                />
-                <span className="text-sm ml-2">{playbackSpeed}x</span>
-              </div>
-              
-              <div className="flex items-center">
-                <span className="text-sm mr-2">Step:</span>
-                <span className="text-sm">{currentStep} / {sortingSteps.length - 1}</span>
+            {/* Secondary Controls */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex items-center">
+                  <span className="text-sm mr-2">Speed:</span>
+                  <input
+                    type="range"
+                    min="0.5"
+                    max="3"
+                    step="0.5"
+                    value={playbackSpeed}
+                    onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))}
+                    className="w-20 sm:w-24"
+                  />
+                  <span className="text-sm ml-2">{playbackSpeed}x</span>
+                </div>
+                
+                <div className="flex items-center">
+                  <span className="text-sm mr-2">Step:</span>
+                  <span className="text-sm">{currentStep} / {sortingSteps.length - 1}</span>
+                </div>
               </div>
               
               <button
                 onClick={() => setCodeVisible(!codeVisible)}
-                className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm
+                className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm
                           ${theme === 'dark' 
                             ? 'bg-dark-surface hover:bg-dark-primary/20' 
                             : 'bg-light-surface hover:bg-light-primary/20'}`}
@@ -744,32 +746,32 @@ function merge(left, right) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className={`rounded-lg p-4 mb-6 overflow-auto max-h-80
+              className={`rounded-lg p-4 mb-6 overflow-auto max-h-60 sm:max-h-80
                         ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
             >
-              <pre className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
+              <pre className={`text-xs sm:text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'} whitespace-pre-wrap`}>
                 <code>{getAlgorithmCode()}</code>
               </pre>
             </motion.div>
           )}
           
           {/* Legend */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 text-sm">
             <div className="flex items-center">
               <div className={`w-4 h-4 rounded mr-2 ${theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300'}`}></div>
-              <span className="text-sm">Unsorted</span>
+              <span>Unsorted</span>
             </div>
             <div className="flex items-center">
               <div className={`w-4 h-4 rounded mr-2 ${theme === 'dark' ? 'bg-dark-primary' : 'bg-light-primary'}`}></div>
-              <span className="text-sm">Comparing</span>
+              <span>Comparing</span>
             </div>
             <div className="flex items-center">
               <div className="w-4 h-4 rounded mr-2 bg-red-500"></div>
-              <span className="text-sm">Swapping</span>
+              <span>Swapping</span>
             </div>
             <div className="flex items-center">
               <div className="w-4 h-4 rounded mr-2 bg-green-500"></div>
-              <span className="text-sm">Sorted</span>
+              <span>Sorted</span>
             </div>
           </div>
         </div>

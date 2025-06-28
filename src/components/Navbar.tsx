@@ -50,6 +50,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.5 }}
             >
               <Rocket 
@@ -61,14 +62,15 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`transition-colors duration-300 hover:text-light-primary dark:hover:text-dark-primary
+                className={`transition-all duration-300 hover:text-light-primary dark:hover:text-dark-primary
+                          px-3 py-2 rounded-lg hover:bg-light-primary/10 dark:hover:bg-dark-primary/10
                           ${isActive(link.path) 
-                            ? 'text-light-primary dark:text-dark-primary font-medium' 
+                            ? 'text-light-primary dark:text-dark-primary font-medium bg-light-primary/10 dark:bg-dark-primary/10' 
                             : ''}`}
               >
                 {link.name}
@@ -77,26 +79,34 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Theme Toggle and Menu Button */}
-          <div className="flex items-center space-x-4">
-            <button
+          <div className="flex items-center space-x-2">
+            <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-full transition-colors duration-300
+              className="p-3 rounded-full transition-colors duration-300
                        hover:bg-light-primary/10 dark:hover:bg-dark-primary/10"
               aria-label="Toggle theme"
+              whileTap={{ scale: 0.9 }}
             >
-              {theme === 'dark' ? (
-                <Sun size={20} className="text-dark-primary" />
-              ) : (
-                <Moon size={20} className="text-light-primary" />
-              )}
-            </button>
+              <motion.div
+                initial={false}
+                animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {theme === 'dark' ? (
+                  <Sun size={20} className="text-dark-primary" />
+                ) : (
+                  <Moon size={20} className="text-light-primary" />
+                )}
+              </motion.div>
+            </motion.button>
 
             {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 rounded-full transition-colors duration-300
+            <motion.button
+              className="lg:hidden p-3 rounded-full transition-colors duration-300
                        hover:bg-light-primary/10 dark:hover:bg-dark-primary/10"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
+              whileTap={{ scale: 0.9 }}
             >
               <motion.div
                 initial={false}
@@ -109,7 +119,7 @@ const Navbar: React.FC = () => {
                   <Menu size={20} className={theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'} />
                 )}
               </motion.div>
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -118,27 +128,33 @@ const Navbar: React.FC = () => {
           {isMenuOpen && (
             <motion.div
               ref={menuRef}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden mt-4 py-4 space-y-2"
+              initial={{ opacity: 0, y: -20, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: 'auto' }}
+              exit={{ opacity: 0, y: -20, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden mt-4 py-4 space-y-2 border-t border-gray-200 dark:border-gray-700"
             >
-              {navLinks.map((link) => (
-                <Link
+              {navLinks.map((link, index) => (
+                <motion.div
                   key={link.path}
-                  to={link.path}
-                  className={`block px-4 py-2 rounded-lg transition-colors duration-300
-                            ${isActive(link.path)
-                              ? theme === 'dark'
-                                ? 'bg-dark-primary text-dark-background'
-                                : 'bg-light-primary text-white'
-                              : theme === 'dark'
-                                ? 'hover:bg-dark-primary/20'
-                                : 'hover:bg-light-primary/20'}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    to={link.path}
+                    className={`block px-4 py-3 rounded-lg transition-all duration-300 text-lg
+                              ${isActive(link.path)
+                                ? theme === 'dark'
+                                  ? 'bg-dark-primary text-dark-background'
+                                  : 'bg-light-primary text-white'
+                                : theme === 'dark'
+                                  ? 'hover:bg-dark-primary/20'
+                                  : 'hover:bg-light-primary/20'}`}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           )}

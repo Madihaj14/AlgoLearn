@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Search, BookOpen, ChevronRight } from 'lucide-react';
+import { Search, BookOpen, ChevronRight, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import VisualizerButton from '../components/visualizer/VisualizerButton';
 
@@ -103,50 +103,50 @@ const AlgorithmsPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-8 sm:py-12">
       <div className="container mx-auto px-4">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className={`text-4xl font-bold mb-4
+          <h1 className={`text-3xl sm:text-4xl font-bold mb-4
                         ${theme === 'dark' ? 'text-dark-text' : 'text-light-text'}`}>
             Algorithms
           </h1>
-          <p className="text-xl max-w-3xl mx-auto opacity-80">
+          <p className="text-lg sm:text-xl max-w-3xl mx-auto opacity-80 px-4">
             Explore various algorithms and learn how they work through interactive visualizations.
           </p>
         </motion.div>
         
         {/* Search and Filter */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
+          <div className="flex flex-col gap-4">
             {/* Search Bar */}
-            <div className="flex-1">
-              <div className={`flex items-center p-2 rounded-full
+            <div className="w-full">
+              <div className={`flex items-center p-3 rounded-full
                             ${theme === 'dark'
                               ? 'bg-dark-surface border border-dark-primary/30'
                               : 'bg-light-surface border border-light-primary/30'}`}>
-                <Search size={20} className="ml-2 mr-1 opacity-60" />
+                <Search size={20} className="ml-2 mr-3 opacity-60 flex-shrink-0" />
                 <input
                   type="text"
                   placeholder="Search algorithms..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className={`w-full px-3 py-2 bg-transparent focus:outline-none
+                  className={`w-full px-2 py-1 bg-transparent focus:outline-none
                             ${theme === 'dark' ? 'text-dark-text' : 'text-light-text'}`}
                 />
               </div>
             </div>
             
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {categories.map(category => (
                 <motion.button
                   key={category.id}
-                  className={`px-4 py-2 rounded-full transition-all duration-300
+                  className={`px-4 py-2 rounded-full transition-all duration-300 text-sm sm:text-base
                             ${selectedCategory === category.id
                               ? theme === 'dark'
                                 ? 'bg-dark-primary text-dark-background'
@@ -167,7 +167,7 @@ const AlgorithmsPage: React.FC = () => {
         </div>
         
         {/* Algorithms Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredAlgorithms.map((algo, index) => (
             <motion.div
               key={algo.id}
@@ -175,9 +175,10 @@ const AlgorithmsPage: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
                 <img 
                   src={algo.image} 
                   alt={algo.name} 
@@ -185,27 +186,27 @@ const AlgorithmsPage: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-4 left-4">
-                  <h3 className="text-white text-xl font-bold">{algo.name}</h3>
+                  <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
                 </div>
               </div>
               
-              <div className="p-6">
-                <p className="mb-4 opacity-80">{algo.description}</p>
+              <div className="p-4 sm:p-6">
+                <p className="mb-4 opacity-80 text-sm sm:text-base line-clamp-3">{algo.description}</p>
                 
                 {/* Complexity Badges */}
-                <div className="flex gap-4 mb-4">
-                  <div>
-                    <span className="text-sm opacity-70">Time:</span>
-                    <span className={`ml-2 text-sm px-2 py-1 rounded-full
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4">
+                  <div className="flex items-center">
+                    <span className="text-xs sm:text-sm opacity-70 mr-2">Time:</span>
+                    <span className={`text-xs sm:text-sm px-2 py-1 rounded-full
                                   ${theme === 'dark'
                                     ? 'bg-dark-primary/20 text-dark-primary'
                                     : 'bg-light-primary/20 text-light-primary'}`}>
                       {algo.timeComplexity}
                     </span>
                   </div>
-                  <div>
-                    <span className="text-sm opacity-70">Space:</span>
-                    <span className={`ml-2 text-sm px-2 py-1 rounded-full
+                  <div className="flex items-center">
+                    <span className="text-xs sm:text-sm opacity-70 mr-2">Space:</span>
+                    <span className={`text-xs sm:text-sm px-2 py-1 rounded-full
                                   ${theme === 'dark'
                                     ? 'bg-dark-primary/20 text-dark-primary'
                                     : 'bg-light-primary/20 text-light-primary'}`}>
@@ -230,11 +231,11 @@ const AlgorithmsPage: React.FC = () => {
                 </div>
                 
                 {/* Action Buttons */}
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row justify-between gap-3">
                   <VisualizerButton algorithm={algo.id} />
                   <button 
                     onClick={() => navigate(`/documentation/${algo.id}`)}
-                    className={`flex items-center text-sm font-medium
+                    className={`flex items-center justify-center text-sm font-medium
                               ${theme === 'dark'
                                 ? 'text-dark-primary'
                                 : 'text-light-primary'}`}
@@ -243,7 +244,7 @@ const AlgorithmsPage: React.FC = () => {
                   </button>
                   <button 
                     onClick={() => navigate('/practice')}
-                    className={`flex items-center text-sm font-medium
+                    className={`flex items-center justify-center text-sm font-medium
                               ${theme === 'dark'
                                 ? 'text-dark-primary'
                                 : 'text-light-primary'}`}
@@ -258,7 +259,7 @@ const AlgorithmsPage: React.FC = () => {
         
         {filteredAlgorithms.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-xl opacity-80">No algorithms found matching your criteria.</p>
+            <p className="text-lg sm:text-xl opacity-80">No algorithms found matching your criteria.</p>
             <button 
               onClick={() => {
                 setSelectedCategory('all');
