@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Search, BookOpen, ChevronRight, Filter } from 'lucide-react';
+import { Search, BookOpen, ChevronRight, Filter, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import VisualizerButton from '../components/visualizer/VisualizerButton';
 
@@ -13,6 +13,7 @@ interface Algorithm {
   categories: string[];
   timeComplexity: string;
   spaceComplexity: string;
+  subcategory?: string;
 }
 
 const AlgorithmsPage: React.FC = () => {
@@ -25,6 +26,7 @@ const AlgorithmsPage: React.FC = () => {
     { id: 'all', name: 'All' },
     { id: 'sorting', name: 'Sorting' },
     { id: 'searching', name: 'Searching' },
+    { id: 'backtracking', name: 'Backtracking' },
     { id: 'graph', name: 'Graph' },
     { id: 'dynamic', name: 'Dynamic Programming' },
   ];
@@ -67,6 +69,16 @@ const AlgorithmsPage: React.FC = () => {
       spaceComplexity: 'O(1)',
     },
     {
+      id: 'backtracking',
+      name: 'Backtracking Algorithms',
+      description: 'A collection of algorithms that systematically search for solutions by trying partial solutions and abandoning them if they cannot lead to a complete solution.',
+      image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      categories: ['backtracking'],
+      timeComplexity: 'Varies',
+      spaceComplexity: 'Varies',
+      subcategory: 'backtracking'
+    },
+    {
       id: 'dijkstra',
       name: "Dijkstra's Algorithm",
       description: 'An algorithm for finding the shortest paths between nodes in a weighted graph.',
@@ -101,6 +113,15 @@ const AlgorithmsPage: React.FC = () => {
     const matchesCategory = selectedCategory === 'all' || algo.categories.includes(selectedCategory);
     return matchesSearch && matchesCategory;
   });
+
+  const handleAlgorithmClick = (algo: Algorithm) => {
+    if (algo.subcategory === 'backtracking') {
+      navigate('/algorithms/backtracking');
+    } else {
+      // Handle other algorithm types
+      navigate(`/documentation/${algo.id}`);
+    }
+  };
 
   return (
     <div className="min-h-screen py-8 sm:py-12">
@@ -171,12 +192,13 @@ const AlgorithmsPage: React.FC = () => {
           {filteredAlgorithms.map((algo, index) => (
             <motion.div
               key={algo.id}
-              className="card card-glass overflow-hidden group"
+              className="card card-glass overflow-hidden group cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => handleAlgorithmClick(algo)}
             >
               <div className="relative h-40 sm:h-48 overflow-hidden">
                 <img 
@@ -188,6 +210,11 @@ const AlgorithmsPage: React.FC = () => {
                 <div className="absolute bottom-4 left-4">
                   <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
                 </div>
+                {algo.subcategory && (
+                  <div className="absolute top-4 right-4">
+                    <ArrowRight size={20} className="text-white" />
+                  </div>
+                )}
               </div>
               
               <div className="p-4 sm:p-6">
@@ -232,9 +259,12 @@ const AlgorithmsPage: React.FC = () => {
                 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row justify-between gap-3">
-                  <VisualizerButton algorithm={algo.id} />
+                  {!algo.subcategory && <VisualizerButton algorithm={algo.id} />}
                   <button 
-                    onClick={() => navigate(`/documentation/${algo.id}`)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/documentation/${algo.id}`);
+                    }}
                     className={`flex items-center justify-center text-sm font-medium
                               ${theme === 'dark'
                                 ? 'text-dark-primary'
@@ -243,7 +273,10 @@ const AlgorithmsPage: React.FC = () => {
                     <BookOpen size={16} className="mr-1" /> Learn
                   </button>
                   <button 
-                    onClick={() => navigate('/practice')}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate('/practice');
+                    }}
                     className={`flex items-center justify-center text-sm font-medium
                               ${theme === 'dark'
                                 ? 'text-dark-primary'

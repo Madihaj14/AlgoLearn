@@ -10,6 +10,7 @@ import DocumentationPage from './pages/DocumentationPage';
 import AboutPage from './pages/AboutPage';
 import ProgressPage from './pages/ProgressPage';
 import PracticePage from './pages/PracticePage';
+import BacktrackingPage from './pages/BacktrackingPage';
 import AlgorithmVisualizerPage from './pages/visualization/AlgorithmVisualizerPage';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/data-structures" element={<DataStructuresPage />} />
           <Route path="/algorithms" element={<AlgorithmsPage />} />
+          <Route path="/algorithms/backtracking" element={<BacktrackingPage />} />
           <Route path="/documentation" element={<DocumentationPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/progress" element={<ProgressPage />} />
