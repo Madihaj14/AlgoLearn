@@ -1,134 +1,124 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Search, BookOpen, ChevronRight, Filter, ArrowRight } from 'lucide-react';
+import { Search, ArrowUpDown, BarChart3, Play, BookOpen, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import VisualizerButton from '../components/visualizer/VisualizerButton';
+import SortingVisualizer from '../components/visualizer/SortingVisualizer';
 
-interface Algorithm {
+interface SortingAlgorithm {
   id: string;
   name: string;
   description: string;
   image: string;
-  categories: string[];
+  difficulty: 'Easy' | 'Medium' | 'Hard';
   timeComplexity: string;
   spaceComplexity: string;
-  subcategory?: string;
+  category: 'Simple' | 'Efficient';
+  icon: React.ReactNode;
 }
 
-const AlgorithmsPage: React.FC = () => {
+const SortingPage: React.FC = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  
-  const categories = [
-    { id: 'all', name: 'All' },
-    { id: 'sorting', name: 'Sorting' },
-    { id: 'searching', name: 'Searching' },
-    { id: 'backtracking', name: 'Backtracking' },
-    { id: 'graph', name: 'Graph' },
-    { id: 'dynamic', name: 'Dynamic Programming' },
-  ];
-  
-  const algorithms: Algorithm[] = [
+
+  const algorithms: SortingAlgorithm[] = [
     {
-      id: 'sorting',
-      name: 'Sorting Algorithms',
-      description: 'A comprehensive collection of sorting algorithms including bubble sort, insertion sort, selection sort, quick sort, and merge sort with detailed visualizations.',
-      image: 'https://images.unsplash.com/photo-1518281420975-50db6e5d0a97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      categories: ['sorting'],
-      timeComplexity: 'Varies',
-      spaceComplexity: 'Varies',
-      subcategory: 'sorting'
+      id: 'bubble-sort',
+      name: 'Bubble Sort',
+      description: 'A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.',
+      image: 'https://images.unsplash.com/photo-1518281420975-50db6e5d0a97?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      difficulty: 'Easy',
+      timeComplexity: 'O(n²)',
+      spaceComplexity: 'O(1)',
+      category: 'Simple',
+      icon: <ArrowUpDown size={20} />
+    },
+    {
+      id: 'insertion-sort',
+      name: 'Insertion Sort',
+      description: 'A simple sorting algorithm that builds the final sorted array one item at a time by repeatedly inserting elements into their correct position.',
+      image: 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      difficulty: 'Easy',
+      timeComplexity: 'O(n²)',
+      spaceComplexity: 'O(1)',
+      category: 'Simple',
+      icon: <ArrowUpDown size={20} />
+    },
+    {
+      id: 'selection-sort',
+      name: 'Selection Sort',
+      description: 'A sorting algorithm that divides the input into sorted and unsorted regions, repeatedly selecting the smallest element from the unsorted region.',
+      image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
+      difficulty: 'Easy',
+      timeComplexity: 'O(n²)',
+      spaceComplexity: 'O(1)',
+      category: 'Simple',
+      icon: <ArrowUpDown size={20} />
     },
     {
       id: 'quick-sort',
       name: 'Quick Sort',
-      description: 'An efficient, in-place sorting algorithm that uses divide and conquer strategy to sort elements.',
-      image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
-      categories: ['sorting'],
+      description: 'An efficient divide-and-conquer sorting algorithm that works by selecting a pivot element and partitioning the array around it.',
+      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      difficulty: 'Medium',
       timeComplexity: 'O(n log n)',
       spaceComplexity: 'O(log n)',
+      category: 'Efficient',
+      icon: <BarChart3 size={20} />
     },
     {
       id: 'merge-sort',
       name: 'Merge Sort',
-      description: 'A divide and conquer algorithm that divides the input array into two halves, recursively sorts them, and then merges the sorted halves.',
-      image: 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      categories: ['sorting'],
+      description: 'A divide-and-conquer algorithm that divides the input array into two halves, recursively sorts them, and then merges the sorted halves.',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2034&q=80',
+      difficulty: 'Medium',
       timeComplexity: 'O(n log n)',
       spaceComplexity: 'O(n)',
-    },
-    {
-      id: 'binary-search',
-      name: 'Binary Search',
-      description: 'An efficient algorithm for searching a sorted array by repeatedly dividing the search interval in half.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      categories: ['searching'],
-      timeComplexity: 'O(log n)',
-      spaceComplexity: 'O(1)',
-    },
-    {
-      id: 'backtracking',
-      name: 'Backtracking Algorithms',
-      description: 'A collection of algorithms that systematically search for solutions by trying partial solutions and abandoning them if they cannot lead to a complete solution.',
-      image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      categories: ['backtracking'],
-      timeComplexity: 'Varies',
-      spaceComplexity: 'Varies',
-      subcategory: 'backtracking'
-    },
-    {
-      id: 'dijkstra',
-      name: "Dijkstra's Algorithm",
-      description: 'An algorithm for finding the shortest paths between nodes in a weighted graph.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2034&q=80',
-      categories: ['graph'],
-      timeComplexity: 'O((V + E) log V)',
-      spaceComplexity: 'O(V)',
-    },
-    {
-      id: 'dfs',
-      name: 'Depth First Search',
-      description: 'A graph traversal algorithm that explores as far as possible along each branch before backtracking.',
-      image: 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2187&q=80',
-      categories: ['graph', 'searching'],
-      timeComplexity: 'O(V + E)',
-      spaceComplexity: 'O(V)',
-    },
-    {
-      id: 'knapsack',
-      name: '0/1 Knapsack',
-      description: 'A dynamic programming solution for maximizing the value of items that can be included in a knapsack of fixed capacity.',
-      image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2106&q=80',
-      categories: ['dynamic'],
-      timeComplexity: 'O(nW)',
-      spaceComplexity: 'O(nW)',
-    },
+      category: 'Efficient',
+      icon: <BarChart3 size={20} />
+    }
   ];
-  
+
+  const categories = [
+    { id: 'all', name: 'All Algorithms' },
+    { id: 'Simple', name: 'Simple Sorts' },
+    { id: 'Efficient', name: 'Efficient Sorts' }
+  ];
+
   const filteredAlgorithms = algorithms.filter(algo => {
     const matchesSearch = algo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          algo.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || algo.categories.includes(selectedCategory);
+    const matchesCategory = selectedCategory === 'all' || algo.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const handleAlgorithmClick = (algo: Algorithm) => {
-    if (algo.subcategory === 'backtracking') {
-      navigate('/algorithms/backtracking');
-    } else if (algo.subcategory === 'sorting') {
-      navigate('/algorithms/sorting');
-    } else {
-      // Handle other algorithm types
-      navigate(`/documentation/${algo.id}`);
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'Easy': return 'text-green-500 bg-green-500/20';
+      case 'Medium': return 'text-yellow-500 bg-yellow-500/20';
+      case 'Hard': return 'text-red-500 bg-red-500/20';
+      default: return 'text-gray-500 bg-gray-500/20';
     }
   };
 
   return (
     <div className="min-h-screen py-8 sm:py-12">
       <div className="container mx-auto px-4">
+        {/* Navigation */}
+        <div className="mb-8">
+          <button
+            onClick={() => navigate('/algorithms')}
+            className={`flex items-center text-sm font-medium mb-4
+                      ${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'}`}
+          >
+            <ArrowLeft size={16} className="mr-1" /> Back to Algorithms
+          </button>
+        </div>
+
+        {/* Header */}
         <motion.div 
           className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -137,13 +127,13 @@ const AlgorithmsPage: React.FC = () => {
         >
           <h1 className={`text-3xl sm:text-4xl font-bold mb-4
                         ${theme === 'dark' ? 'text-dark-text' : 'text-light-text'}`}>
-            Algorithms
+            Sorting Algorithms
           </h1>
           <p className="text-lg sm:text-xl max-w-3xl mx-auto opacity-80 px-4">
-            Explore various algorithms and learn how they work through interactive visualizations.
+            Explore different sorting algorithms and understand how they organize data through interactive visualizations.
           </p>
         </motion.div>
-        
+
         {/* Search and Filter */}
         <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
           <div className="flex flex-col gap-4">
@@ -156,7 +146,7 @@ const AlgorithmsPage: React.FC = () => {
                 <Search size={20} className="ml-2 mr-3 opacity-60 flex-shrink-0" />
                 <input
                   type="text"
-                  placeholder="Search algorithms..."
+                  placeholder="Search sorting algorithms..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full px-2 py-1 bg-transparent focus:outline-none
@@ -189,19 +179,18 @@ const AlgorithmsPage: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Algorithms Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredAlgorithms.map((algo, index) => (
             <motion.div
               key={algo.id}
-              className="card card-glass overflow-hidden group cursor-pointer"
+              className="card card-glass overflow-hidden group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleAlgorithmClick(algo)}
             >
               <div className="relative h-40 sm:h-48 overflow-hidden">
                 <img 
@@ -211,13 +200,16 @@ const AlgorithmsPage: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-4 left-4">
+                  <div className="flex items-center mb-2">
+                    <div className={`p-2 rounded-full mr-2
+                                  ${theme === 'dark' 
+                                    ? 'bg-dark-primary/20 text-dark-primary' 
+                                    : 'bg-light-primary/20 text-light-primary'}`}>
+                      {algo.icon}
+                    </div>
+                  </div>
                   <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
                 </div>
-                {algo.subcategory && (
-                  <div className="absolute top-4 right-4">
-                    <ArrowRight size={20} className="text-white" />
-                  </div>
-                )}
               </div>
               
               <div className="p-4 sm:p-6">
@@ -244,48 +236,39 @@ const AlgorithmsPage: React.FC = () => {
                     </span>
                   </div>
                 </div>
-                
-                {/* Categories */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {algo.categories.map(category => (
-                    <span 
-                      key={`${algo.id}-${category}`}
-                      className={`text-xs px-2 py-1 rounded-full
-                               ${theme === 'dark'
-                                 ? 'bg-dark-primary/20 text-dark-primary'
-                                 : 'bg-light-primary/20 text-light-primary'}`}
-                    >
-                      {categories.find(c => c.id === category)?.name}
-                    </span>
-                  ))}
+
+                {/* Category and Difficulty */}
+                <div className="flex justify-between items-center mb-6">
+                  <span className={`text-xs px-2 py-1 rounded-full
+                                 ${theme === 'dark'
+                                   ? 'bg-dark-primary/20 text-dark-primary'
+                                   : 'bg-light-primary/20 text-light-primary'}`}>
+                    {algo.category}
+                  </span>
+                  <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(algo.difficulty)}`}>
+                    {algo.difficulty}
+                  </span>
                 </div>
                 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row justify-between gap-3">
-                  {!algo.subcategory && <VisualizerButton algorithm={algo.id} />}
+                  <button
+                    onClick={() => setSelectedAlgorithm(algo.id)}
+                    className={`flex items-center justify-center text-sm font-medium
+                              ${theme === 'dark'
+                                ? 'text-dark-primary hover:text-dark-primary/80'
+                                : 'text-light-primary hover:text-light-primary/80'}`}
+                  >
+                    <Play size={16} className="mr-1" /> Visualize
+                  </button>
                   <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`/documentation/${algo.id}`);
-                    }}
+                    onClick={() => navigate(`/documentation#${algo.id}`)}
                     className={`flex items-center justify-center text-sm font-medium
                               ${theme === 'dark'
                                 ? 'text-dark-primary hover:text-dark-primary/80'
                                 : 'text-light-primary hover:text-light-primary/80'}`}
                   >
                     <BookOpen size={16} className="mr-1" /> Learn
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/practice');
-                    }}
-                    className={`flex items-center justify-center text-sm font-medium
-                              ${theme === 'dark'
-                                ? 'text-dark-primary hover:text-dark-primary/80'
-                                : 'text-light-primary hover:text-light-primary/80'}`}
-                  >
-                    Practice
                   </button>
                 </div>
               </div>
@@ -295,24 +278,20 @@ const AlgorithmsPage: React.FC = () => {
         
         {filteredAlgorithms.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-lg sm:text-xl opacity-80">No algorithms found matching your criteria.</p>
-            <button 
-              onClick={() => {
-                setSelectedCategory('all');
-                setSearchQuery('');
-              }}
-              className={`mt-4 flex items-center mx-auto text-sm font-medium
-                        ${theme === 'dark'
-                          ? 'text-dark-primary'
-                          : 'text-light-primary'}`}
-            >
-              Reset filters <ChevronRight size={16} className="ml-1" />
-            </button>
+            <p className="text-lg sm:text-xl opacity-80">No algorithms found matching your search.</p>
           </div>
+        )}
+
+        {/* Visualizer Modal */}
+        {selectedAlgorithm && (
+          <SortingVisualizer
+            algorithm={selectedAlgorithm}
+            onClose={() => setSelectedAlgorithm(null)}
+          />
         )}
       </div>
     </div>
   );
 };
 
-export default AlgorithmsPage;
+export default SortingPage;

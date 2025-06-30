@@ -11,6 +11,7 @@ import AboutPage from './pages/AboutPage';
 import ProgressPage from './pages/ProgressPage';
 import PracticePage from './pages/PracticePage';
 import BacktrackingPage from './pages/BacktrackingPage';
+import SortingPage from './pages/SortingPage';
 import AlgorithmVisualizerPage from './pages/visualization/AlgorithmVisualizerPage';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/data-structures" element={<DataStructuresPage />} />
           <Route path="/algorithms" element={<AlgorithmsPage />} />
           <Route path="/algorithms/backtracking" element={<BacktrackingPage />} />
+          <Route path="/algorithms/sorting" element={<SortingPage />} />
           <Route path="/documentation" element={<DocumentationPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/progress" element={<ProgressPage />} />
