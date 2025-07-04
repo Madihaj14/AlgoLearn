@@ -24,7 +24,7 @@ export interface AlgorithmInfo {
   timeComplexity: string;
   spaceComplexity: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
-  code: string;
+  code: string | { javascript: string; java: string };
 }
 
 export interface VisualizerState {
@@ -64,4 +64,72 @@ export interface MazeState extends BacktrackingState {
   end: [number, number];
   currentPath: [number, number][];
   deadEnds: [number, number][];
+}
+
+// Dynamic Programming specific types
+export interface DPState {
+  dpTable: any[][];
+  currentState: any;
+  optimalValue: number;
+  optimalSolution: any;
+}
+
+export interface FibonacciState extends DPState {
+  n: number;
+  currentN: number;
+  memo: Record<number, number>;
+}
+
+export interface KnapsackState extends DPState {
+  items: { weight: number; value: number }[];
+  capacity: number;
+  currentItem: number;
+  currentWeight: number;
+  selectedItems: number[];
+}
+
+export interface LCSState extends DPState {
+  str1: string;
+  str2: string;
+  currentI: number;
+  currentJ: number;
+  lcsString: string;
+}
+
+export interface EditDistanceState extends DPState {
+  str1: string;
+  str2: string;
+  currentI: number;
+  currentJ: number;
+  operations: string[];
+}
+
+// Tree-based search specific types
+export interface TreeSearchState {
+  tree: any;
+  currentNode: any;
+  searchPath: any[];
+  target: number;
+  found: boolean;
+}
+
+export interface BinarySearchTreeState extends TreeSearchState {
+  tree: { nodes: any[]; edges: any[] };
+  currentNode: number;
+  searchPath: number[];
+}
+
+export interface TrieSearchState extends TreeSearchState {
+  trie: { nodes: any[]; edges: any[] };
+  currentNode: string;
+  searchPath: string[];
+  prefix: string;
+  matches: string[];
+}
+
+export interface BTreeSearchState extends TreeSearchState {
+  tree: { nodes: any[]; edges: any[] };
+  currentNode: number[];
+  searchPath: number[][];
+  order: number;
 }

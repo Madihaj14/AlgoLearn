@@ -8,12 +8,12 @@ import DataStructuresPage from './pages/DataStructuresPage';
 import AlgorithmsPage from './pages/AlgorithmsPage';
 import DocumentationPage from './pages/DocumentationPage';
 import AboutPage from './pages/AboutPage';
-import ProgressPage from './pages/ProgressPage';
 import PracticePage from './pages/PracticePage';
 import BacktrackingPage from './pages/BacktrackingPage';
 import SortingPage from './pages/SortingPage';
 import SearchingPage from './pages/SearchingPage';
 import GraphPage from './pages/GraphPage';
+import DynamicProgrammingPage from './pages/DynamicProgrammingPage';
 import AlgorithmVisualizerPage from './pages/visualization/AlgorithmVisualizerPage';
 
 function App() {
@@ -30,9 +30,9 @@ function App() {
           <Route path="/algorithms/sorting" element={<SortingPage />} />
           <Route path="/algorithms/searching" element={<SearchingPage />} />
           <Route path="/algorithms/graph" element={<GraphPage />} />
+          <Route path="/algorithms/dynamic-programming" element={<DynamicProgrammingPage />} />
           <Route path="/documentation" element={<DocumentationPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/progress" element={<ProgressPage />} />
           <Route path="/practice" element={<PracticePage />} />
           <Route path="/visualization/:algorithmId" element={<AlgorithmVisualizerPage />} />
         </Routes>

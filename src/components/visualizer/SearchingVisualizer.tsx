@@ -7,6 +7,7 @@ import { LinearSearchVisualizer } from '../../lib/visualizer/searching/linearSea
 import { BinarySearchVisualizer } from '../../lib/visualizer/searching/binarySearch';
 import { JumpSearchVisualizer } from '../../lib/visualizer/searching/jumpSearch';
 import { InterpolationSearchVisualizer } from '../../lib/visualizer/searching/interpolationSearch';
+import TreeSearchVisualizer from './TreeSearchVisualizer';
 
 interface SearchingVisualizerProps {
   algorithm: string;
@@ -42,8 +43,13 @@ const SearchingVisualizer: React.FC<SearchingVisualizerProps> = ({ algorithm, on
   const [targetValue, setTargetValue] = useState<number>(30);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Check if this is a tree-based algorithm
+  const isTreeBased = ['binary-search-tree', 'trie-search', 'b-tree-search'].includes(algorithm);
+
   useEffect(() => {
-    initializeAlgorithm();
+    if (!isTreeBased) {
+      initializeAlgorithm();
+    }
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -255,6 +261,11 @@ const SearchingVisualizer: React.FC<SearchingVisualizerProps> = ({ algorithm, on
       </div>
     );
   };
+
+  // If this is a tree-based algorithm, render the TreeSearchVisualizer
+  if (isTreeBased) {
+    return <TreeSearchVisualizer algorithm={algorithm} onClose={onClose} />;
+  }
 
   return (
     <motion.div

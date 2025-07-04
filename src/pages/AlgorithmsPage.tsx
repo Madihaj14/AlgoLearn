@@ -73,23 +73,15 @@ const AlgorithmsPage: React.FC = () => {
       subcategory: 'graph'
     },
     {
-      id: 'dijkstra',
-      name: "Dijkstra's Algorithm",
-      description: 'An algorithm for finding the shortest paths between nodes in a weighted graph.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2034&q=80',
-      categories: ['graph'],
-      timeComplexity: 'O((V + E) log V)',
-      spaceComplexity: 'O(V)',
-    },
-    {
-      id: 'knapsack',
-      name: '0/1 Knapsack',
-      description: 'A dynamic programming solution for maximizing the value of items that can be included in a knapsack of fixed capacity.',
-      image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2106&q=80',
+      id: 'dynamic-programming',
+      name: 'Dynamic Programming',
+      description: 'Master dynamic programming with classic problems like Fibonacci, Knapsack, Longest Common Subsequence, and more with step-by-step visualizations.',
+      image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
       categories: ['dynamic'],
-      timeComplexity: 'O(nW)',
-      spaceComplexity: 'O(nW)',
-    },
+      timeComplexity: 'Varies',
+      spaceComplexity: 'Varies',
+      subcategory: 'dynamic-programming'
+    }
   ];
   
   const filteredAlgorithms = algorithms.filter(algo => {
@@ -108,6 +100,8 @@ const AlgorithmsPage: React.FC = () => {
       navigate('/algorithms/searching');
     } else if (algo.subcategory === 'graph') {
       navigate('/algorithms/graph');
+    } else if (algo.subcategory === 'dynamic-programming') {
+      navigate('/algorithms/dynamic-programming');
     } else {
       // Handle other algorithm types
       navigate(`/documentation/${algo.id}`);

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Search, GitBranch, Target, Zap, Play, BookOpen, ArrowLeft, Network, TreePine } from 'lucide-react';
+import { Search, Calculator, TrendingUp, Grid, Layers, Play, BookOpen, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import SearchingVisualizer from '../components/visualizer/SearchingVisualizer';
+import DynamicProgrammingVisualizer from '../components/visualizer/DynamicProgrammingVisualizer';
 
-interface SearchingAlgorithm {
+interface DPAlgorithm {
   id: string;
   name: string;
   description: string;
@@ -13,102 +13,113 @@ interface SearchingAlgorithm {
   difficulty: 'Easy' | 'Medium' | 'Hard';
   timeComplexity: string;
   spaceComplexity: string;
-  category: 'Linear' | 'Divide & Conquer' | 'Tree-based';
+  category: 'Classic' | 'String' | 'Array';
   icon: React.ReactNode;
 }
 
-const SearchingPage: React.FC = () => {
+const DynamicProgrammingPage: React.FC = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  const algorithms: SearchingAlgorithm[] = [
+  const algorithms: DPAlgorithm[] = [
     {
-      id: 'linear-search',
-      name: 'Linear Search',
-      description: 'A simple search algorithm that checks every element in a list sequentially until a match is found or the end is reached.',
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      id: 'fibonacci',
+      name: 'Fibonacci Sequence',
+      description: 'Classic dynamic programming problem demonstrating memoization and bottom-up approaches to compute Fibonacci numbers efficiently.',
+      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Easy',
       timeComplexity: 'O(n)',
-      spaceComplexity: 'O(1)',
-      category: 'Linear',
-      icon: <Search size={20} />
-    },
-    {
-      id: 'binary-search',
-      name: 'Binary Search',
-      description: 'An efficient algorithm for searching a sorted array by repeatedly dividing the search interval in half.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      difficulty: 'Medium',
-      timeComplexity: 'O(log n)',
-      spaceComplexity: 'O(1)',
-      category: 'Divide & Conquer',
-      icon: <Target size={20} />
-    },
-    {
-      id: 'jump-search',
-      name: 'Jump Search',
-      description: 'A searching algorithm for sorted arrays that works by jumping ahead by fixed steps and then performing linear search.',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      difficulty: 'Medium',
-      timeComplexity: 'O(√n)',
-      spaceComplexity: 'O(1)',
-      category: 'Linear',
-      icon: <Zap size={20} />
-    },
-    {
-      id: 'interpolation-search',
-      name: 'Interpolation Search',
-      description: 'An improved variant of binary search for uniformly distributed sorted arrays that estimates the position of the target.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      difficulty: 'Hard',
-      timeComplexity: 'O(log log n)',
-      spaceComplexity: 'O(1)',
-      category: 'Divide & Conquer',
-      icon: <Target size={20} />
-    },
-    {
-      id: 'binary-search-tree',
-      name: 'Binary Search Tree',
-      description: 'A tree-based data structure where each node has at most two children, and all nodes to the left are less than the current node, while all nodes to the right are greater.',
-      image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80',
-      difficulty: 'Medium',
-      timeComplexity: 'O(log n)',
       spaceComplexity: 'O(n)',
-      category: 'Tree-based',
-      icon: <TreePine size={20} />
+      category: 'Classic',
+      icon: <Calculator size={20} />
     },
     {
-      id: 'trie-search',
-      name: 'Trie Search',
-      description: 'A specialized tree-based data structure used for efficient retrieval of keys in a dataset of strings, particularly useful for prefix-based searching.',
-      image: 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      id: 'knapsack-01',
+      name: '0/1 Knapsack Problem',
+      description: 'Optimize the selection of items with given weights and values to maximize value within a weight constraint using dynamic programming.',
+      image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&auto=format&fit=crop&w=2106&q=80',
+      difficulty: 'Medium',
+      timeComplexity: 'O(nW)',
+      spaceComplexity: 'O(nW)',
+      category: 'Classic',
+      icon: <Grid size={20} />
+    },
+    {
+      id: 'lcs',
+      name: 'Longest Common Subsequence',
+      description: 'Find the longest subsequence common to two sequences using dynamic programming with 2D table approach.',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      difficulty: 'Medium',
+      timeComplexity: 'O(mn)',
+      spaceComplexity: 'O(mn)',
+      category: 'String',
+      icon: <Layers size={20} />
+    },
+    {
+      id: 'lis',
+      name: 'Longest Increasing Subsequence',
+      description: 'Find the length of the longest subsequence where elements are in increasing order using dynamic programming.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      difficulty: 'Medium',
+      timeComplexity: 'O(n²)',
+      spaceComplexity: 'O(n)',
+      category: 'Array',
+      icon: <TrendingUp size={20} />
+    },
+    {
+      id: 'edit-distance',
+      name: 'Edit Distance (Levenshtein)',
+      description: 'Calculate the minimum number of operations required to transform one string into another using insertions, deletions, and substitutions.',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
-      timeComplexity: 'O(m)',
-      spaceComplexity: 'O(n*m)',
-      category: 'Tree-based',
-      icon: <GitBranch size={20} />
+      timeComplexity: 'O(mn)',
+      spaceComplexity: 'O(mn)',
+      category: 'String',
+      icon: <Calculator size={20} />
     },
     {
-      id: 'b-tree-search',
-      name: 'B-Tree Search',
-      description: 'A self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.',
+      id: 'coin-change',
+      name: 'Coin Change Problem',
+      description: 'Find the minimum number of coins needed to make a given amount using dynamic programming with optimal substructure.',
+      image: 'https://images.unsplash.com/photo-1621619856624-42fd193a0661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+      difficulty: 'Medium',
+      timeComplexity: 'O(amount × coins)',
+      spaceComplexity: 'O(amount)',
+      category: 'Classic',
+      icon: <Grid size={20} />
+    },
+    {
+      id: 'matrix-chain',
+      name: 'Matrix Chain Multiplication',
+      description: 'Find the optimal way to parenthesize a chain of matrices to minimize the number of scalar multiplications.',
       image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
       difficulty: 'Hard',
-      timeComplexity: 'O(log n)',
-      spaceComplexity: 'O(n)',
-      category: 'Tree-based',
-      icon: <Network size={20} />
+      timeComplexity: 'O(n³)',
+      spaceComplexity: 'O(n²)',
+      category: 'Classic',
+      icon: <Layers size={20} />
+    },
+    {
+      id: 'palindrome-partitioning',
+      name: 'Palindrome Partitioning',
+      description: 'Find the minimum number of cuts needed to partition a string such that every substring is a palindrome.',
+      image: 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      difficulty: 'Hard',
+      timeComplexity: 'O(n³)',
+      spaceComplexity: 'O(n²)',
+      category: 'String',
+      icon: <Calculator size={20} />
     }
   ];
 
   const categories = [
-    { id: 'all', name: 'All Algorithms' },
-    { id: 'Linear', name: 'Linear Search' },
-    { id: 'Divide & Conquer', name: 'Divide & Conquer' },
-    { id: 'Tree-based', name: 'Tree-based' }
+    { id: 'all', name: 'All Problems' },
+    { id: 'Classic', name: 'Classic DP' },
+    { id: 'String', name: 'String DP' },
+    { id: 'Array', name: 'Array DP' }
   ];
 
   const filteredAlgorithms = algorithms.filter(algo => {
@@ -150,10 +161,10 @@ const SearchingPage: React.FC = () => {
         >
           <h1 className={`text-3xl sm:text-4xl font-bold mb-4
                         ${theme === 'dark' ? 'text-dark-text' : 'text-light-text'}`}>
-            Searching Algorithms
+            Dynamic Programming
           </h1>
           <p className="text-lg sm:text-xl max-w-3xl mx-auto opacity-80 px-4">
-            Explore different searching algorithms and understand how they find elements in data structures through interactive visualizations.
+            Master dynamic programming with classic problems and step-by-step visualizations showing optimal substructure and memoization techniques.
           </p>
         </motion.div>
 
@@ -169,7 +180,7 @@ const SearchingPage: React.FC = () => {
                 <Search size={20} className="ml-2 mr-3 opacity-60 flex-shrink-0" />
                 <input
                   type="text"
-                  placeholder="Search searching algorithms..."
+                  placeholder="Search dynamic programming problems..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full px-2 py-1 bg-transparent focus:outline-none
@@ -307,7 +318,7 @@ const SearchingPage: React.FC = () => {
 
         {/* Visualizer Modal */}
         {selectedAlgorithm && (
-          <SearchingVisualizer
+          <DynamicProgrammingVisualizer
             algorithm={selectedAlgorithm}
             onClose={() => setSelectedAlgorithm(null)}
           />
@@ -317,4 +328,4 @@ const SearchingPage: React.FC = () => {
   );
 };
 
-export default SearchingPage;
+export default DynamicProgrammingPage;

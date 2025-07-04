@@ -3,81 +3,120 @@ import { Step } from './bubbleSort';
 export const quickSort = (initialArray: number[]): Step[] => {
   const steps: Step[] = [];
   const array = [...initialArray];
-  const sorted = new Set<number>();
+  const sorted: number[] = [];
   
-  const partition = (low: number, high: number): number => {
-    const pivot = array[high];
-    let i = low - 1;
-    
-    for (let j = low; j < high; j++) {
-      // Add comparing step
+  // Initial state
+  steps.push({
+    array: [...array],
+    comparing: [],
+    swapping: [],
+    sorted: []
+  });
+  
+  const quickSortHelper = (arr: number[], low: number, high: number) => {
+    if (low < high) {
+      // Partition the array and get pivot index
+      const pivotIndex = partition(arr, low, high);
+      
+      // Mark pivot as sorted
+      sorted.push(pivotIndex);
       steps.push({
-        array: [...array],
-        comparing: [j, high],
+        array: [...arr],
+        comparing: [],
         swapping: [],
-        sorted: Array.from(sorted)
+        sorted: [...sorted]
       });
       
-      if (array[j] < pivot) {
+      // Recursively sort elements before and after partition
+      quickSortHelper(arr, low, pivotIndex - 1);
+      quickSortHelper(arr, pivotIndex + 1, high);
+    } else if (low === high) {
+      // Single element is already sorted
+      sorted.push(low);
+      steps.push({
+        array: [...array],
+        comparing: [],
+        swapping: [],
+        sorted: [...sorted]
+      });
+    }
+  };
+  
+  const partition = (arr: number[], low: number, high: number): number => {
+    const pivot = arr[high];
+    let i = low - 1;
+    
+    // Add pivot selection step
+    steps.push({
+      array: [...arr],
+      comparing: [high],
+      swapping: [],
+      sorted: [...sorted]
+    });
+    
+    for (let j = low; j < high; j++) {
+      // Add comparison step
+      steps.push({
+        array: [...arr],
+        comparing: [j, high],
+        swapping: [],
+        sorted: [...sorted]
+      });
+      
+      if (arr[j] < pivot) {
         i++;
-        // Add swapping step
+        
+        // Add swap step
         steps.push({
-          array: [...array],
-          comparing: [j, high],
+          array: [...arr],
+          comparing: [],
           swapping: [i, j],
-          sorted: Array.from(sorted)
+          sorted: [...sorted]
         });
         
-        [array[i], array[j]] = [array[j], array[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
         
         // Add post-swap step
         steps.push({
-          array: [...array],
-          comparing: [j, high],
+          array: [...arr],
+          comparing: [],
           swapping: [],
-          sorted: Array.from(sorted)
+          sorted: [...sorted]
         });
       }
     }
     
-    // Swap pivot
+    // Swap pivot to its final position
     steps.push({
-      array: [...array],
+      array: [...arr],
       comparing: [],
       swapping: [i + 1, high],
-      sorted: Array.from(sorted)
+      sorted: [...sorted]
     });
     
-    [array[i + 1], array[high]] = [array[high], array[i + 1]];
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
     
-    sorted.add(i + 1);
+    // Add post-swap step
     steps.push({
-      array: [...array],
+      array: [...arr],
       comparing: [],
       swapping: [],
-      sorted: Array.from(sorted)
+      sorted: [...sorted]
     });
     
     return i + 1;
   };
   
-  const quickSortHelper = (low: number, high: number) => {
-    if (low < high) {
-      const pi = partition(low, high);
-      quickSortHelper(low, pi - 1);
-      quickSortHelper(pi + 1, high);
-    } else if (low === high) {
-      sorted.add(low);
-      steps.push({
-        array: [...array],
-        comparing: [],
-        swapping: [],
-        sorted: Array.from(sorted)
-      });
-    }
-  };
+  quickSortHelper(array, 0, array.length - 1);
   
-  quickSortHelper(0, array.length - 1);
+  // Final state - ensure all elements are marked as sorted
+  const allSorted = Array.from({ length: array.length }, (_, i) => i);
+  steps.push({
+    array: [...array],
+    comparing: [],
+    swapping: [],
+    sorted: allSorted
+  });
   
   return steps;
 };

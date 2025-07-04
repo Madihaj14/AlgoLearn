@@ -55,14 +55,20 @@ const AlgorithmVisualizerPage: React.FC = () => {
     const algorithm = algorithms[algorithmId];
     const newSteps = algorithm(state.array);
     setSteps(newSteps);
-    setState(prev => ({
-      ...prev,
-      currentStep: 0,
-      isPlaying: false,
-      comparingIndices: [],
-      swappingIndices: [],
-      sortedIndices: []
-    }));
+    
+    // Set initial state from first step
+    if (newSteps.length > 0) {
+      const initialStep = newSteps[0];
+      setState(prev => ({
+        ...prev,
+        currentStep: 0,
+        isPlaying: false,
+        array: [...initialStep.array],
+        comparingIndices: [...initialStep.comparing],
+        swappingIndices: [...initialStep.swapping],
+        sortedIndices: [...initialStep.sorted]
+      }));
+    }
   };
 
   const togglePlay = () => {
@@ -75,10 +81,10 @@ const AlgorithmVisualizerPage: React.FC = () => {
       setState(prev => ({
         ...prev,
         currentStep: prev.currentStep + 1,
-        array: nextStep.array,
-        comparingIndices: nextStep.comparing,
-        swappingIndices: nextStep.swapping,
-        sortedIndices: nextStep.sorted
+        array: [...nextStep.array],
+        comparingIndices: [...nextStep.comparing],
+        swappingIndices: [...nextStep.swapping],
+        sortedIndices: [...nextStep.sorted]
       }));
     } else {
       setState(prev => ({ ...prev, isPlaying: false }));
@@ -91,10 +97,10 @@ const AlgorithmVisualizerPage: React.FC = () => {
       setState(prev => ({
         ...prev,
         currentStep: prev.currentStep - 1,
-        array: prevStep.array,
-        comparingIndices: prevStep.comparing,
-        swappingIndices: prevStep.swapping,
-        sortedIndices: prevStep.sorted
+        array: [...prevStep.array],
+        comparingIndices: [...prevStep.comparing],
+        swappingIndices: [...prevStep.swapping],
+        sortedIndices: [...prevStep.sorted]
       }));
     }
   };
@@ -107,10 +113,10 @@ const AlgorithmVisualizerPage: React.FC = () => {
       ...prev,
       currentStep: 0,
       isPlaying: false,
-      array: initialStep.array,
-      comparingIndices: initialStep.comparing,
-      swappingIndices: initialStep.swapping,
-      sortedIndices: initialStep.sorted
+      array: [...initialStep.array],
+      comparingIndices: [...initialStep.comparing],
+      swappingIndices: [...initialStep.swapping],
+      sortedIndices: [...initialStep.sorted]
     }));
   };
 
@@ -144,7 +150,7 @@ const AlgorithmVisualizerPage: React.FC = () => {
         clearInterval(timerRef.current);
       }
     };
-  }, [state.isPlaying, state.speed]);
+  }, [state.isPlaying, state.speed, state.currentStep]);
 
   const maxValue = Math.max(...state.array) * 1.2;
 
@@ -197,6 +203,9 @@ const AlgorithmVisualizerPage: React.FC = () => {
                         height: `${(value / maxValue) * 100}%`,
                         transition: 'height 0.3s ease-in-out'
                       }}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <span className="text-xs font-medium mb-1 text-white">
                         {value}
@@ -312,6 +321,26 @@ const AlgorithmVisualizerPage: React.FC = () => {
                   </pre>
                 </motion.div>
               )}
+              
+              {/* Legend */}
+              <div className="mt-6 flex flex-wrap gap-4 text-sm justify-center">
+                <div className="flex items-center">
+                  <div className={`w-4 h-4 rounded mr-2 ${theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300'}`}></div>
+                  <span>Unsorted</span>
+                </div>
+                <div className="flex items-center">
+                  <div className={`w-4 h-4 rounded mr-2 ${theme === 'dark' ? 'bg-dark-primary' : 'bg-light-primary'}`}></div>
+                  <span>Comparing</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-4 h-4 rounded mr-2 bg-red-500"></div>
+                  <span>Swapping</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-4 h-4 rounded mr-2 bg-green-500"></div>
+                  <span>Sorted</span>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

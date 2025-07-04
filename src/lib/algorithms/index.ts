@@ -28,7 +28,18 @@ export const algorithms: Record<string, Algorithm> = {
 };
 
 export const getAlgorithmTitle = (id: string): string => {
-  return id
+  const titles: Record<string, string> = {
+    'bubble-sort': 'Bubble Sort',
+    'quick-sort': 'Quick Sort',
+    'merge-sort': 'Merge Sort',
+    'insertion-sort': 'Insertion Sort',
+    'selection-sort': 'Selection Sort',
+    'heap-sort': 'Heap Sort',
+    'binary-search': 'Binary Search',
+    'linear-search': 'Linear Search'
+  };
+  
+  return titles[id] || id
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');

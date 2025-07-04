@@ -12,7 +12,6 @@ export const linearSearch = (initialArray: number[], target: number): Step[] => 
     sorted: []
   });
   
-  // Search through array
   for (let i = 0; i < array.length; i++) {
     // Show current element being checked
     steps.push({
@@ -32,14 +31,6 @@ export const linearSearch = (initialArray: number[], target: number): Step[] => 
       });
       break;
     }
-    
-    // Show element was checked
-    steps.push({
-      array: [...array],
-      comparing: [],
-      swapping: [],
-      sorted: []
-    });
   }
   
   return steps;

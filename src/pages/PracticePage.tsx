@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Search, Filter, CheckCircle, Circle, ExternalLink, BookOpen, Code, Brain } from 'lucide-react';
+import { Search, Filter, CheckCircle, Circle } from 'lucide-react';
 
 interface Question {
   id: string;
@@ -49,188 +49,770 @@ const questions: Question[] = [
     category: 'Arrays',
     link: 'https://leetcode.com/problems/maximum-subarray/'
   },
+  {
+    id: '6',
+    title: 'Maximum Product Subarray',
+    difficulty: 'Medium',
+    category: 'Arrays',
+    link: 'https://leetcode.com/problems/maximum-product-subarray/'
+  },
+  {
+    id: '7',
+    title: 'Find Minimum in Rotated Sorted Array',
+    difficulty: 'Medium',
+    category: 'Arrays',
+    link: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/'
+  },
+  {
+    id: '8',
+    title: 'Search in Rotated Sorted Array',
+    difficulty: 'Medium',
+    category: 'Arrays',
+    link: 'https://leetcode.com/problems/search-in-rotated-sorted-array/'
+  },
+  {
+    id: '9',
+    title: '3Sum',
+    difficulty: 'Medium',
+    category: 'Arrays',
+    link: 'https://leetcode.com/problems/3sum/'
+  },
+  {
+    id: '10',
+    title: 'Container With Most Water',
+    difficulty: 'Medium',
+    category: 'Arrays',
+    link: 'https://leetcode.com/problems/container-with-most-water/'
+  },
   
   // Two Pointers
   {
-    id: '6',
+    id: '11',
     title: 'Valid Palindrome',
     difficulty: 'Easy',
     category: 'Two Pointers',
     link: 'https://leetcode.com/problems/valid-palindrome/'
   },
   {
-    id: '7',
-    title: '3Sum',
-    difficulty: 'Medium',
+    id: '12',
+    title: 'Reverse String',
+    difficulty: 'Easy',
     category: 'Two Pointers',
-    link: 'https://leetcode.com/problems/3sum/'
+    link: 'https://leetcode.com/problems/reverse-string/'
   },
   {
-    id: '8',
-    title: 'Container With Most Water',
-    difficulty: 'Medium',
+    id: '13',
+    title: 'Merge Sorted Array',
+    difficulty: 'Easy',
     category: 'Two Pointers',
-    link: 'https://leetcode.com/problems/container-with-most-water/'
+    link: 'https://leetcode.com/problems/merge-sorted-array/'
+  },
+  {
+    id: '14',
+    title: 'Remove Duplicates from Sorted Array',
+    difficulty: 'Easy',
+    category: 'Two Pointers',
+    link: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array/'
   },
   
   // Sliding Window
   {
-    id: '9',
+    id: '15',
     title: 'Longest Substring Without Repeating Characters',
     difficulty: 'Medium',
     category: 'Sliding Window',
     link: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/'
   },
   {
-    id: '10',
+    id: '16',
     title: 'Longest Repeating Character Replacement',
     difficulty: 'Medium',
     category: 'Sliding Window',
     link: 'https://leetcode.com/problems/longest-repeating-character-replacement/'
   },
+  {
+    id: '17',
+    title: 'Minimum Size Subarray Sum',
+    difficulty: 'Medium',
+    category: 'Sliding Window',
+    link: 'https://leetcode.com/problems/minimum-size-subarray-sum/'
+  },
+  {
+    id: '18',
+    title: 'Sliding Window Maximum',
+    difficulty: 'Hard',
+    category: 'Sliding Window',
+    link: 'https://leetcode.com/problems/sliding-window-maximum/'
+  },
   
   // Stack
   {
-    id: '11',
+    id: '19',
     title: 'Valid Parentheses',
     difficulty: 'Easy',
     category: 'Stack',
     link: 'https://leetcode.com/problems/valid-parentheses/'
   },
+  {
+    id: '20',
+    title: 'Min Stack',
+    difficulty: 'Easy',
+    category: 'Stack',
+    link: 'https://leetcode.com/problems/min-stack/'
+  },
+  {
+    id: '21',
+    title: 'Evaluate Reverse Polish Notation',
+    difficulty: 'Medium',
+    category: 'Stack',
+    link: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/'
+  },
+  {
+    id: '22',
+    title: 'Daily Temperatures',
+    difficulty: 'Medium',
+    category: 'Stack',
+    link: 'https://leetcode.com/problems/daily-temperatures/'
+  },
+  {
+    id: '23',
+    title: 'Largest Rectangle in Histogram',
+    difficulty: 'Hard',
+    category: 'Stack',
+    link: 'https://leetcode.com/problems/largest-rectangle-in-histogram/'
+  },
   
   // Binary Search
   {
-    id: '12',
-    title: 'Search in Rotated Sorted Array',
-    difficulty: 'Medium',
+    id: '24',
+    title: 'Binary Search',
+    difficulty: 'Easy',
     category: 'Binary Search',
-    link: 'https://leetcode.com/problems/search-in-rotated-sorted-array/'
+    link: 'https://leetcode.com/problems/binary-search/'
   },
   {
-    id: '13',
-    title: 'Find Minimum in Rotated Sorted Array',
+    id: '25',
+    title: 'Search Insert Position',
+    difficulty: 'Easy',
+    category: 'Binary Search',
+    link: 'https://leetcode.com/problems/search-insert-position/'
+  },
+  {
+    id: '26',
+    title: 'Find First and Last Position of Element in Sorted Array',
     difficulty: 'Medium',
     category: 'Binary Search',
-    link: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/'
+    link: 'https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/'
+  },
+  {
+    id: '27',
+    title: 'Search a 2D Matrix',
+    difficulty: 'Medium',
+    category: 'Binary Search',
+    link: 'https://leetcode.com/problems/search-a-2d-matrix/'
+  },
+  {
+    id: '28',
+    title: 'Median of Two Sorted Arrays',
+    difficulty: 'Hard',
+    category: 'Binary Search',
+    link: 'https://leetcode.com/problems/median-of-two-sorted-arrays/'
   },
   
   // Linked List
   {
-    id: '14',
+    id: '29',
     title: 'Reverse Linked List',
     difficulty: 'Easy',
     category: 'Linked List',
     link: 'https://leetcode.com/problems/reverse-linked-list/'
   },
   {
-    id: '15',
+    id: '30',
     title: 'Merge Two Sorted Lists',
     difficulty: 'Easy',
     category: 'Linked List',
     link: 'https://leetcode.com/problems/merge-two-sorted-lists/'
   },
   {
-    id: '16',
+    id: '31',
+    title: 'Linked List Cycle',
+    difficulty: 'Easy',
+    category: 'Linked List',
+    link: 'https://leetcode.com/problems/linked-list-cycle/'
+  },
+  {
+    id: '32',
     title: 'Reorder List',
     difficulty: 'Medium',
     category: 'Linked List',
     link: 'https://leetcode.com/problems/reorder-list/'
   },
+  {
+    id: '33',
+    title: 'Remove Nth Node From End of List',
+    difficulty: 'Medium',
+    category: 'Linked List',
+    link: 'https://leetcode.com/problems/remove-nth-node-from-end-of-list/'
+  },
+  {
+    id: '34',
+    title: 'Copy List with Random Pointer',
+    difficulty: 'Medium',
+    category: 'Linked List',
+    link: 'https://leetcode.com/problems/copy-list-with-random-pointer/'
+  },
+  {
+    id: '35',
+    title: 'LRU Cache',
+    difficulty: 'Medium',
+    category: 'Linked List',
+    link: 'https://leetcode.com/problems/lru-cache/'
+  },
+  {
+    id: '36',
+    title: 'Merge k Sorted Lists',
+    difficulty: 'Hard',
+    category: 'Linked List',
+    link: 'https://leetcode.com/problems/merge-k-sorted-lists/'
+  },
   
   // Trees
   {
-    id: '17',
+    id: '37',
     title: 'Maximum Depth of Binary Tree',
     difficulty: 'Easy',
     category: 'Trees',
     link: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/'
   },
   {
-    id: '18',
+    id: '38',
     title: 'Same Tree',
     difficulty: 'Easy',
     category: 'Trees',
     link: 'https://leetcode.com/problems/same-tree/'
   },
   {
-    id: '19',
+    id: '39',
+    title: 'Invert Binary Tree',
+    difficulty: 'Easy',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/invert-binary-tree/'
+  },
+  {
+    id: '40',
+    title: 'Subtree of Another Tree',
+    difficulty: 'Easy',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/subtree-of-another-tree/'
+  },
+  {
+    id: '41',
     title: 'Binary Tree Level Order Traversal',
     difficulty: 'Medium',
     category: 'Trees',
     link: 'https://leetcode.com/problems/binary-tree-level-order-traversal/'
   },
+  {
+    id: '42',
+    title: 'Validate Binary Search Tree',
+    difficulty: 'Medium',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/validate-binary-search-tree/'
+  },
+  {
+    id: '43',
+    title: 'Kth Smallest Element in a BST',
+    difficulty: 'Medium',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/kth-smallest-element-in-a-bst/'
+  },
+  {
+    id: '44',
+    title: 'Construct Binary Tree from Preorder and Inorder Traversal',
+    difficulty: 'Medium',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/'
+  },
+  {
+    id: '45',
+    title: 'Binary Tree Maximum Path Sum',
+    difficulty: 'Hard',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/'
+  },
+  {
+    id: '46',
+    title: 'Serialize and Deserialize Binary Tree',
+    difficulty: 'Hard',
+    category: 'Trees',
+    link: 'https://leetcode.com/problems/serialize-and-deserialize-binary-tree/'
+  },
   
   // Tries
   {
-    id: '20',
+    id: '47',
     title: 'Implement Trie (Prefix Tree)',
     difficulty: 'Medium',
     category: 'Tries',
     link: 'https://leetcode.com/problems/implement-trie-prefix-tree/'
   },
+  {
+    id: '48',
+    title: 'Word Search II',
+    difficulty: 'Hard',
+    category: 'Tries',
+    link: 'https://leetcode.com/problems/word-search-ii/'
+  },
+  {
+    id: '49',
+    title: 'Design Add and Search Words Data Structure',
+    difficulty: 'Medium',
+    category: 'Tries',
+    link: 'https://leetcode.com/problems/design-add-and-search-words-data-structure/'
+  },
   
   // Heap / Priority Queue
   {
-    id: '21',
+    id: '50',
+    title: 'Kth Largest Element in an Array',
+    difficulty: 'Medium',
+    category: 'Heap',
+    link: 'https://leetcode.com/problems/kth-largest-element-in-an-array/'
+  },
+  {
+    id: '51',
+    title: 'Top K Frequent Elements',
+    difficulty: 'Medium',
+    category: 'Heap',
+    link: 'https://leetcode.com/problems/top-k-frequent-elements/'
+  },
+  {
+    id: '52',
     title: 'Find Median from Data Stream',
     difficulty: 'Hard',
     category: 'Heap',
     link: 'https://leetcode.com/problems/find-median-from-data-stream/'
   },
+  {
+    id: '53',
+    title: 'Merge K Sorted Lists',
+    difficulty: 'Hard',
+    category: 'Heap',
+    link: 'https://leetcode.com/problems/merge-k-sorted-lists/'
+  },
   
   // Backtracking
   {
-    id: '22',
+    id: '54',
+    title: 'Letter Combinations of a Phone Number',
+    difficulty: 'Medium',
+    category: 'Backtracking',
+    link: 'https://leetcode.com/problems/letter-combinations-of-a-phone-number/'
+  },
+  {
+    id: '55',
+    title: 'Generate Parentheses',
+    difficulty: 'Medium',
+    category: 'Backtracking',
+    link: 'https://leetcode.com/problems/generate-parentheses/'
+  },
+  {
+    id: '56',
+    title: 'Permutations',
+    difficulty: 'Medium',
+    category: 'Backtracking',
+    link: 'https://leetcode.com/problems/permutations/'
+  },
+  {
+    id: '57',
+    title: 'Subsets',
+    difficulty: 'Medium',
+    category: 'Backtracking',
+    link: 'https://leetcode.com/problems/subsets/'
+  },
+  {
+    id: '58',
     title: 'Combination Sum',
     difficulty: 'Medium',
     category: 'Backtracking',
     link: 'https://leetcode.com/problems/combination-sum/'
   },
   {
-    id: '23',
+    id: '59',
     title: 'Word Search',
     difficulty: 'Medium',
     category: 'Backtracking',
     link: 'https://leetcode.com/problems/word-search/'
   },
+  {
+    id: '60',
+    title: 'Palindrome Partitioning',
+    difficulty: 'Medium',
+    category: 'Backtracking',
+    link: 'https://leetcode.com/problems/palindrome-partitioning/'
+  },
+  {
+    id: '61',
+    title: 'N-Queens',
+    difficulty: 'Hard',
+    category: 'Backtracking',
+    link: 'https://leetcode.com/problems/n-queens/'
+  },
   
   // Graphs
   {
-    id: '24',
+    id: '62',
     title: 'Number of Islands',
     difficulty: 'Medium',
     category: 'Graphs',
     link: 'https://leetcode.com/problems/number-of-islands/'
   },
   {
-    id: '25',
+    id: '63',
     title: 'Clone Graph',
     difficulty: 'Medium',
     category: 'Graphs',
     link: 'https://leetcode.com/problems/clone-graph/'
   },
+  {
+    id: '64',
+    title: 'Pacific Atlantic Water Flow',
+    difficulty: 'Medium',
+    category: 'Graphs',
+    link: 'https://leetcode.com/problems/pacific-atlantic-water-flow/'
+  },
+  {
+    id: '65',
+    title: 'Course Schedule',
+    difficulty: 'Medium',
+    category: 'Graphs',
+    link: 'https://leetcode.com/problems/course-schedule/'
+  },
+  {
+    id: '66',
+    title: 'Course Schedule II',
+    difficulty: 'Medium',
+    category: 'Graphs',
+    link: 'https://leetcode.com/problems/course-schedule-ii/'
+  },
+  {
+    id: '67',
+    title: 'Redundant Connection',
+    difficulty: 'Medium',
+    category: 'Graphs',
+    link: 'https://leetcode.com/problems/redundant-connection/'
+  },
+  {
+    id: '68',
+    title: 'Word Ladder',
+    difficulty: 'Hard',
+    category: 'Graphs',
+    link: 'https://leetcode.com/problems/word-ladder/'
+  },
+  {
+    id: '69',
+    title: 'Alien Dictionary',
+    difficulty: 'Hard',
+    category: 'Graphs',
+    link: 'https://leetcode.com/problems/alien-dictionary/'
+  },
   
   // Dynamic Programming
   {
-    id: '26',
+    id: '70',
     title: 'Climbing Stairs',
     difficulty: 'Easy',
     category: 'Dynamic Programming',
     link: 'https://leetcode.com/problems/climbing-stairs/'
   },
   {
-    id: '27',
+    id: '71',
     title: 'House Robber',
     difficulty: 'Medium',
     category: 'Dynamic Programming',
     link: 'https://leetcode.com/problems/house-robber/'
   },
   {
-    id: '28',
+    id: '72',
+    title: 'House Robber II',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/house-robber-ii/'
+  },
+  {
+    id: '73',
     title: 'Longest Palindromic Substring',
     difficulty: 'Medium',
     category: 'Dynamic Programming',
     link: 'https://leetcode.com/problems/longest-palindromic-substring/'
+  },
+  {
+    id: '74',
+    title: 'Decode Ways',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/decode-ways/'
+  },
+  {
+    id: '75',
+    title: 'Unique Paths',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/unique-paths/'
+  },
+  {
+    id: '76',
+    title: 'Jump Game',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/jump-game/'
+  },
+  {
+    id: '77',
+    title: 'Coin Change',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/coin-change/'
+  },
+  {
+    id: '78',
+    title: 'Longest Increasing Subsequence',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/longest-increasing-subsequence/'
+  },
+  {
+    id: '79',
+    title: 'Word Break',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/word-break/'
+  },
+  {
+    id: '80',
+    title: 'Combination Sum IV',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/combination-sum-iv/'
+  },
+  {
+    id: '81',
+    title: 'Regular Expression Matching',
+    difficulty: 'Hard',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/regular-expression-matching/'
+  },
+  {
+    id: '82',
+    title: 'Longest Valid Parentheses',
+    difficulty: 'Hard',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/longest-valid-parentheses/'
+  },
+  {
+    id: '83',
+    title: 'Edit Distance',
+    difficulty: 'Hard',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/edit-distance/'
+  },
+  {
+    id: '84',
+    title: 'Burst Balloons',
+    difficulty: 'Hard',
+    category: 'Dynamic Programming',
+    link: 'https://leetcode.com/problems/burst-balloons/'
+  },
+  
+  // Greedy
+  {
+    id: '85',
+    title: 'Maximum Subarray',
+    difficulty: 'Easy',
+    category: 'Greedy',
+    link: 'https://leetcode.com/problems/maximum-subarray/'
+  },
+  {
+    id: '86',
+    title: 'Jump Game',
+    difficulty: 'Medium',
+    category: 'Greedy',
+    link: 'https://leetcode.com/problems/jump-game/'
+  },
+  {
+    id: '87',
+    title: 'Gas Station',
+    difficulty: 'Medium',
+    category: 'Greedy',
+    link: 'https://leetcode.com/problems/gas-station/'
+  },
+  {
+    id: '88',
+    title: 'Hand of Straights',
+    difficulty: 'Medium',
+    category: 'Greedy',
+    link: 'https://leetcode.com/problems/hand-of-straights/'
+  },
+  {
+    id: '89',
+    title: 'Merge Triplets to Form Target Triplet',
+    difficulty: 'Medium',
+    category: 'Greedy',
+    link: 'https://leetcode.com/problems/merge-triplets-to-form-target-triplet/'
+  },
+  {
+    id: '90',
+    title: 'Partition Labels',
+    difficulty: 'Medium',
+    category: 'Greedy',
+    link: 'https://leetcode.com/problems/partition-labels/'
+  },
+  
+  // Intervals
+  {
+    id: '91',
+    title: 'Meeting Rooms',
+    difficulty: 'Easy',
+    category: 'Intervals',
+    link: 'https://leetcode.com/problems/meeting-rooms/'
+  },
+  {
+    id: '92',
+    title: 'Merge Intervals',
+    difficulty: 'Medium',
+    category: 'Intervals',
+    link: 'https://leetcode.com/problems/merge-intervals/'
+  },
+  {
+    id: '93',
+    title: 'Insert Interval',
+    difficulty: 'Medium',
+    category: 'Intervals',
+    link: 'https://leetcode.com/problems/insert-interval/'
+  },
+  {
+    id: '94',
+    title: 'Non-overlapping Intervals',
+    difficulty: 'Medium',
+    category: 'Intervals',
+    link: 'https://leetcode.com/problems/non-overlapping-intervals/'
+  },
+  {
+    id: '95',
+    title: 'Meeting Rooms II',
+    difficulty: 'Medium',
+    category: 'Intervals',
+    link: 'https://leetcode.com/problems/meeting-rooms-ii/'
+  },
+  {
+    id: '96',
+    title: 'Minimum Interval to Include Each Query',
+    difficulty: 'Hard',
+    category: 'Intervals',
+    link: 'https://leetcode.com/problems/minimum-interval-to-include-each-query/'
+  },
+  
+  // Math & Geometry
+  {
+    id: '97',
+    title: 'Rotate Image',
+    difficulty: 'Medium',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/rotate-image/'
+  },
+  {
+    id: '98',
+    title: 'Spiral Matrix',
+    difficulty: 'Medium',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/spiral-matrix/'
+  },
+  {
+    id: '99',
+    title: 'Set Matrix Zeroes',
+    difficulty: 'Medium',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/set-matrix-zeroes/'
+  },
+  {
+    id: '100',
+    title: 'Happy Number',
+    difficulty: 'Easy',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/happy-number/'
+  },
+  {
+    id: '101',
+    title: 'Plus One',
+    difficulty: 'Easy',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/plus-one/'
+  },
+  {
+    id: '102',
+    title: 'Pow(x, n)',
+    difficulty: 'Medium',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/powx-n/'
+  },
+  {
+    id: '103',
+    title: 'Multiply Strings',
+    difficulty: 'Medium',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/multiply-strings/'
+  },
+  {
+    id: '104',
+    title: 'Detect Squares',
+    difficulty: 'Medium',
+    category: 'Math & Geometry',
+    link: 'https://leetcode.com/problems/detect-squares/'
+  },
+  
+  // Bit Manipulation
+  {
+    id: '105',
+    title: 'Single Number',
+    difficulty: 'Easy',
+    category: 'Bit Manipulation',
+    link: 'https://leetcode.com/problems/single-number/'
+  },
+  {
+    id: '106',
+    title: 'Number of 1 Bits',
+    difficulty: 'Easy',
+    category: 'Bit Manipulation',
+    link: 'https://leetcode.com/problems/number-of-1-bits/'
+  },
+  {
+    id: '107',
+    title: 'Counting Bits',
+    difficulty: 'Easy',
+    category: 'Bit Manipulation',
+    link: 'https://leetcode.com/problems/counting-bits/'
+  },
+  {
+    id: '108',
+    title: 'Reverse Bits',
+    difficulty: 'Easy',
+    category: 'Bit Manipulation',
+    link: 'https://leetcode.com/problems/reverse-bits/'
+  },
+  {
+    id: '109',
+    title: 'Missing Number',
+    difficulty: 'Easy',
+    category: 'Bit Manipulation',
+    link: 'https://leetcode.com/problems/missing-number/'
+  },
+  {
+    id: '110',
+    title: 'Sum of Two Integers',
+    difficulty: 'Medium',
+    category: 'Bit Manipulation',
+    link: 'https://leetcode.com/problems/sum-of-two-integers/'
   }
 ];
 
@@ -463,27 +1045,17 @@ const PracticePage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-2">
-                  <a
-                    href={`/documentation#${question.category.toLowerCase()}`}
-                    className={`p-2 rounded-full transition-colors duration-300
-                              ${theme === 'dark'
-                                ? 'hover:bg-dark-primary/20'
-                                : 'hover:bg-light-primary/20'}`}
-                    title="View related documentation"
-                  >
-                    <BookOpen size={20} />
-                  </a>
+                <div>
                   <a
                     href={question.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-2 rounded-full transition-colors duration-300
+                    className={`transition-colors duration-300 text-sm
                               ${theme === 'dark'
-                                ? 'hover:bg-dark-primary/20'
-                                : 'hover:bg-light-primary/20'}`}
+                                ? 'text-dark-primary hover:text-dark-primary/80'
+                                : 'text-light-primary hover:text-light-primary/80'}`}
                   >
-                    <ExternalLink size={20} />
+                    Solve
                   </a>
                 </div>
               </div>
