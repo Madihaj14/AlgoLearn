@@ -9,7 +9,6 @@ interface BacktrackingAlgorithm {
   id: string;
   name: string;
   description: string;
-  image: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
   timeComplexity: string;
   spaceComplexity: string;
@@ -27,41 +26,37 @@ const BacktrackingPage: React.FC = () => {
       id: 'n-queens',
       name: 'N-Queens Problem',
       description: 'Place N queens on an NxN chessboard so that no two queens attack each other. A classic backtracking problem that demonstrates constraint satisfaction.',
-      image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(N!)',
       spaceComplexity: 'O(N)',
-      icon: <Crown size={20} />
+      icon: <Crown size={32} />
     },
     {
       id: 'sudoku-solver',
       name: 'Sudoku Solver',
       description: 'Solve a 9x9 Sudoku puzzle using backtracking. Fill the grid so that every row, column, and 3x3 box contains digits 1-9.',
-      image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(9^(n*n))',
       spaceComplexity: 'O(n*n)',
-      icon: <Grid size={20} />
+      icon: <Grid size={32} />
     },
     {
       id: 'hamiltonian-path',
       name: 'Hamiltonian Path',
       description: 'Find a path in a graph that visits every vertex exactly once. This is a fundamental problem in graph theory and computational complexity.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2034&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(N!)',
       spaceComplexity: 'O(N)',
-      icon: <Route size={20} />
+      icon: <Route size={32} />
     },
     {
       id: 'subset-sum',
       name: 'Subset Sum Problem',
       description: 'Find if there exists a subset of given numbers that sum to a target value. Uses backtracking to explore all possible combinations systematically.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(2^n)',
       spaceComplexity: 'O(n)',
-      icon: <Hash size={20} />
+      icon: <Hash size={32} />
     }
   ];
 
@@ -139,27 +134,17 @@ const BacktrackingPage: React.FC = () => {
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="relative h-40 sm:h-48 overflow-hidden">
-                <img 
-                  src={algo.image} 
-                  alt={algo.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex items-center mb-2">
-                    <div className={`p-2 rounded-full mr-2
-                                  ${theme === 'dark' 
-                                    ? 'bg-dark-primary/20 text-dark-primary' 
-                                    : 'bg-light-primary/20 text-light-primary'}`}>
-                      {algo.icon}
-                    </div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-4 rounded-full
+                                ${theme === 'dark' 
+                                  ? 'bg-dark-primary/20 text-dark-primary' 
+                                  : 'bg-light-primary/20 text-light-primary'}`}>
+                    {algo.icon}
                   </div>
-                  <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
+                  <h3 className="text-xl font-bold ml-4">{algo.name}</h3>
                 </div>
-              </div>
-              
-              <div className="p-4 sm:p-6">
+                
                 <p className="mb-4 opacity-80 text-sm sm:text-base line-clamp-3">{algo.description}</p>
                 
                 {/* Complexity Badges */}

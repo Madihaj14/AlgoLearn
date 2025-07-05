@@ -9,7 +9,6 @@ interface SortingAlgorithm {
   id: string;
   name: string;
   description: string;
-  image: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
   timeComplexity: string;
   spaceComplexity: string;
@@ -29,56 +28,51 @@ const SortingPage: React.FC = () => {
       id: 'bubble-sort',
       name: 'Bubble Sort',
       description: 'A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.',
-      image: 'https://images.unsplash.com/photo-1518281420975-50db6e5d0a97?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Easy',
       timeComplexity: 'O(n²)',
       spaceComplexity: 'O(1)',
       category: 'Simple',
-      icon: <ArrowUpDown size={20} />
+      icon: <ArrowUpDown size={32} />
     },
     {
       id: 'insertion-sort',
       name: 'Insertion Sort',
       description: 'A simple sorting algorithm that builds the final sorted array one item at a time by repeatedly inserting elements into their correct position.',
-      image: 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Easy',
       timeComplexity: 'O(n²)',
       spaceComplexity: 'O(1)',
       category: 'Simple',
-      icon: <ArrowUpDown size={20} />
+      icon: <ArrowUpDown size={32} />
     },
     {
       id: 'selection-sort',
       name: 'Selection Sort',
       description: 'A sorting algorithm that divides the input into sorted and unsorted regions, repeatedly selecting the smallest element from the unsorted region.',
-      image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
       difficulty: 'Easy',
       timeComplexity: 'O(n²)',
       spaceComplexity: 'O(1)',
       category: 'Simple',
-      icon: <ArrowUpDown size={20} />
+      icon: <ArrowUpDown size={32} />
     },
     {
       id: 'quick-sort',
       name: 'Quick Sort',
       description: 'An efficient divide-and-conquer sorting algorithm that works by selecting a pivot element and partitioning the array around it.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(n log n)',
       spaceComplexity: 'O(log n)',
       category: 'Efficient',
-      icon: <BarChart3 size={20} />
+      icon: <BarChart3 size={32} />
     },
     {
       id: 'merge-sort',
       name: 'Merge Sort',
       description: 'A divide-and-conquer algorithm that divides the input array into two halves, recursively sorts them, and then merges the sorted halves.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2034&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(n log n)',
       spaceComplexity: 'O(n)',
       category: 'Efficient',
-      icon: <BarChart3 size={20} />
+      icon: <BarChart3 size={32} />
     }
   ];
 
@@ -192,27 +186,17 @@ const SortingPage: React.FC = () => {
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="relative h-40 sm:h-48 overflow-hidden">
-                <img 
-                  src={algo.image} 
-                  alt={algo.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex items-center mb-2">
-                    <div className={`p-2 rounded-full mr-2
-                                  ${theme === 'dark' 
-                                    ? 'bg-dark-primary/20 text-dark-primary' 
-                                    : 'bg-light-primary/20 text-light-primary'}`}>
-                      {algo.icon}
-                    </div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-4 rounded-full
+                                ${theme === 'dark' 
+                                  ? 'bg-dark-primary/20 text-dark-primary' 
+                                  : 'bg-light-primary/20 text-light-primary'}`}>
+                    {algo.icon}
                   </div>
-                  <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
+                  <h3 className="text-xl font-bold ml-4">{algo.name}</h3>
                 </div>
-              </div>
-              
-              <div className="p-4 sm:p-6">
+                
                 <p className="mb-4 opacity-80 text-sm sm:text-base line-clamp-3">{algo.description}</p>
                 
                 {/* Complexity Badges */}

@@ -9,7 +9,6 @@ interface DPAlgorithm {
   id: string;
   name: string;
   description: string;
-  image: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
   timeComplexity: string;
   spaceComplexity: string;
@@ -29,89 +28,81 @@ const DynamicProgrammingPage: React.FC = () => {
       id: 'fibonacci',
       name: 'Fibonacci Sequence',
       description: 'Classic dynamic programming problem demonstrating memoization and bottom-up approaches to compute Fibonacci numbers efficiently.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Easy',
       timeComplexity: 'O(n)',
       spaceComplexity: 'O(n)',
       category: 'Classic',
-      icon: <Calculator size={20} />
+      icon: <Calculator size={32} />
     },
     {
       id: 'knapsack-01',
       name: '0/1 Knapsack Problem',
       description: 'Optimize the selection of items with given weights and values to maximize value within a weight constraint using dynamic programming.',
-      image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&auto=format&fit=crop&w=2106&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(nW)',
       spaceComplexity: 'O(nW)',
       category: 'Classic',
-      icon: <Grid size={20} />
+      icon: <Grid size={32} />
     },
     {
       id: 'lcs',
       name: 'Longest Common Subsequence',
       description: 'Find the longest subsequence common to two sequences using dynamic programming with 2D table approach.',
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(mn)',
       spaceComplexity: 'O(mn)',
       category: 'String',
-      icon: <Layers size={20} />
+      icon: <Layers size={32} />
     },
     {
       id: 'lis',
       name: 'Longest Increasing Subsequence',
       description: 'Find the length of the longest subsequence where elements are in increasing order using dynamic programming.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(n²)',
       spaceComplexity: 'O(n)',
       category: 'Array',
-      icon: <TrendingUp size={20} />
+      icon: <TrendingUp size={32} />
     },
     {
       id: 'edit-distance',
       name: 'Edit Distance (Levenshtein)',
       description: 'Calculate the minimum number of operations required to transform one string into another using insertions, deletions, and substitutions.',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(mn)',
       spaceComplexity: 'O(mn)',
       category: 'String',
-      icon: <Calculator size={20} />
+      icon: <Calculator size={32} />
     },
     {
       id: 'coin-change',
       name: 'Coin Change Problem',
       description: 'Find the minimum number of coins needed to make a given amount using dynamic programming with optimal substructure.',
-      image: 'https://images.unsplash.com/photo-1621619856624-42fd193a0661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(amount × coins)',
       spaceComplexity: 'O(amount)',
       category: 'Classic',
-      icon: <Grid size={20} />
+      icon: <Grid size={32} />
     },
     {
       id: 'matrix-chain',
       name: 'Matrix Chain Multiplication',
       description: 'Find the optimal way to parenthesize a chain of matrices to minimize the number of scalar multiplications.',
-      image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(n³)',
       spaceComplexity: 'O(n²)',
       category: 'Classic',
-      icon: <Layers size={20} />
+      icon: <Layers size={32} />
     },
     {
       id: 'palindrome-partitioning',
       name: 'Palindrome Partitioning',
       description: 'Find the minimum number of cuts needed to partition a string such that every substring is a palindrome.',
-      image: 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(n³)',
       spaceComplexity: 'O(n²)',
       category: 'String',
-      icon: <Calculator size={20} />
+      icon: <Calculator size={32} />
     }
   ];
 
@@ -226,27 +217,17 @@ const DynamicProgrammingPage: React.FC = () => {
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="relative h-40 sm:h-48 overflow-hidden">
-                <img 
-                  src={algo.image} 
-                  alt={algo.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex items-center mb-2">
-                    <div className={`p-2 rounded-full mr-2
-                                  ${theme === 'dark' 
-                                    ? 'bg-dark-primary/20 text-dark-primary' 
-                                    : 'bg-light-primary/20 text-light-primary'}`}>
-                      {algo.icon}
-                    </div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-4 rounded-full
+                                ${theme === 'dark' 
+                                  ? 'bg-dark-primary/20 text-dark-primary' 
+                                  : 'bg-light-primary/20 text-light-primary'}`}>
+                    {algo.icon}
                   </div>
-                  <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
+                  <h3 className="text-xl font-bold ml-4">{algo.name}</h3>
                 </div>
-              </div>
-              
-              <div className="p-4 sm:p-6">
+                
                 <p className="mb-4 opacity-80 text-sm sm:text-base line-clamp-3">{algo.description}</p>
                 
                 {/* Complexity Badges */}

@@ -20,7 +20,8 @@ export default {
         'dark-text': '#FFFFFF',
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        sans: ['Lato', 'sans-serif'],
+        heading: ['Poppins', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

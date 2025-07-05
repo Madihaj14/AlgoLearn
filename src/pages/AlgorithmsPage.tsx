@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { Search, BookOpen, ChevronRight, Filter, ArrowRight } from 'lucide-react';
+import { Search, BookOpen, ChevronRight, Filter, ArrowRight, BarChart2, Zap, GitBranch, Network, Database, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import VisualizerButton from '../components/visualizer/VisualizerButton';
 
@@ -9,11 +9,11 @@ interface Algorithm {
   id: string;
   name: string;
   description: string;
-  image: string;
   categories: string[];
   timeComplexity: string;
   spaceComplexity: string;
   subcategory?: string;
+  icon: React.ReactNode;
 }
 
 const AlgorithmsPage: React.FC = () => {
@@ -36,51 +36,51 @@ const AlgorithmsPage: React.FC = () => {
       id: 'sorting',
       name: 'Sorting Algorithms',
       description: 'A comprehensive collection of sorting algorithms including bubble sort, insertion sort, selection sort, quick sort, and merge sort with detailed visualizations.',
-      image: 'https://images.unsplash.com/photo-1518281420975-50db6e5d0a97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       categories: ['sorting'],
       timeComplexity: 'Varies',
       spaceComplexity: 'Varies',
-      subcategory: 'sorting'
+      subcategory: 'sorting',
+      icon: <BarChart2 size={32} />
     },
     {
       id: 'searching',
       name: 'Searching Algorithms',
       description: 'Explore various searching algorithms including linear search, binary search, jump search, and interpolation search with interactive visualizations.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       categories: ['searching'],
       timeComplexity: 'Varies',
       spaceComplexity: 'Varies',
-      subcategory: 'searching'
+      subcategory: 'searching',
+      icon: <Zap size={32} />
     },
     {
       id: 'backtracking',
       name: 'Backtracking Algorithms',
       description: 'A collection of algorithms that systematically search for solutions by trying partial solutions and abandoning them if they cannot lead to a complete solution.',
-      image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       categories: ['backtracking'],
       timeComplexity: 'Varies',
       spaceComplexity: 'Varies',
-      subcategory: 'backtracking'
+      subcategory: 'backtracking',
+      icon: <GitBranch size={32} />
     },
     {
       id: 'graph',
       name: 'Graph Algorithms',
       description: 'Comprehensive collection of graph algorithms including DFS, BFS, Dijkstra\'s shortest path, topological sorting, and minimum spanning tree algorithms.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2034&q=80',
       categories: ['graph'],
       timeComplexity: 'Varies',
       spaceComplexity: 'Varies',
-      subcategory: 'graph'
+      subcategory: 'graph',
+      icon: <Network size={32} />
     },
     {
       id: 'dynamic-programming',
       name: 'Dynamic Programming',
       description: 'Master dynamic programming with classic problems like Fibonacci, Knapsack, Longest Common Subsequence, and more with step-by-step visualizations.',
-      image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
       categories: ['dynamic'],
       timeComplexity: 'Varies',
       spaceComplexity: 'Varies',
-      subcategory: 'dynamic-programming'
+      subcategory: 'dynamic-programming',
+      icon: <Code size={32} />
     }
   ];
   
@@ -185,24 +185,17 @@ const AlgorithmsPage: React.FC = () => {
               whileTap={{ scale: 0.98 }}
               onClick={() => handleAlgorithmClick(algo)}
             >
-              <div className="relative h-40 sm:h-48 overflow-hidden">
-                <img 
-                  src={algo.image} 
-                  alt={algo.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
-                </div>
-                {algo.subcategory && (
-                  <div className="absolute top-4 right-4">
-                    <ArrowRight size={20} className="text-white" />
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-4 rounded-full
+                                ${theme === 'dark' 
+                                  ? 'bg-dark-primary/20 text-dark-primary' 
+                                  : 'bg-light-primary/20 text-light-primary'}`}>
+                    {algo.icon}
                   </div>
-                )}
-              </div>
-              
-              <div className="p-4 sm:p-6">
+                  <h3 className="text-xl font-bold ml-4">{algo.name}</h3>
+                </div>
+                
                 <p className="mb-4 opacity-80 text-sm sm:text-base line-clamp-3">{algo.description}</p>
                 
                 {/* Complexity Badges */}

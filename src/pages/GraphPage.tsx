@@ -9,7 +9,6 @@ interface GraphAlgorithm {
   id: string;
   name: string;
   description: string;
-  image: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
   timeComplexity: string;
   spaceComplexity: string;
@@ -29,89 +28,81 @@ const GraphPage: React.FC = () => {
       id: 'dfs',
       name: 'Depth First Search (DFS)',
       description: 'A graph traversal algorithm that explores as far as possible along each branch before backtracking. Uses a stack-based approach.',
-      image: 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2187&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(V + E)',
       spaceComplexity: 'O(V)',
       category: 'Traversal',
-      icon: <GitBranch size={20} />
+      icon: <GitBranch size={32} />
     },
     {
       id: 'bfs',
       name: 'Breadth First Search (BFS)',
       description: 'A graph traversal algorithm that explores all vertices at the current depth before moving to vertices at the next depth level.',
-      image: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(V + E)',
       spaceComplexity: 'O(V)',
       category: 'Traversal',
-      icon: <Network size={20} />
+      icon: <Network size={32} />
     },
     {
       id: 'dijkstra',
       name: "Dijkstra's Algorithm",
       description: 'Finds the shortest path between nodes in a weighted graph with non-negative edge weights using a greedy approach.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2034&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O((V + E) log V)',
       spaceComplexity: 'O(V)',
       category: 'Shortest Path',
-      icon: <MapPin size={20} />
+      icon: <MapPin size={32} />
     },
     {
       id: 'bellman-ford',
       name: 'Bellman-Ford Algorithm',
       description: 'Computes shortest paths from a single source vertex to all other vertices in a weighted graph, can handle negative weights.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(VE)',
       spaceComplexity: 'O(V)',
       category: 'Shortest Path',
-      icon: <Route size={20} />
+      icon: <Route size={32} />
     },
     {
       id: 'floyd-warshall',
       name: 'Floyd-Warshall Algorithm',
       description: 'Finds shortest paths between all pairs of vertices in a weighted graph with positive or negative edge weights.',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Hard',
       timeComplexity: 'O(V³)',
       spaceComplexity: 'O(V²)',
       category: 'Shortest Path',
-      icon: <Network size={20} />
+      icon: <Network size={32} />
     },
     {
       id: 'kruskal',
       name: "Kruskal's Algorithm",
       description: 'Finds a minimum spanning tree for a connected weighted graph using a greedy algorithm that sorts edges by weight.',
-      image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(E log E)',
       spaceComplexity: 'O(V)',
       category: 'Minimum Spanning Tree',
-      icon: <TreePine size={20} />
+      icon: <TreePine size={32} />
     },
     {
       id: 'prim',
       name: "Prim's Algorithm",
       description: 'Finds a minimum spanning tree for a weighted undirected graph by growing the tree one vertex at a time.',
-      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(E log V)',
       spaceComplexity: 'O(V)',
       category: 'Minimum Spanning Tree',
-      icon: <TreePine size={20} />
+      icon: <TreePine size={32} />
     },
     {
       id: 'topological-sort',
       name: 'Topological Sort',
       description: 'Linear ordering of vertices in a directed acyclic graph (DAG) such that for every directed edge, the source comes before the destination.',
-      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       difficulty: 'Medium',
       timeComplexity: 'O(V + E)',
       spaceComplexity: 'O(V)',
       category: 'Topological',
-      icon: <Shuffle size={20} />
+      icon: <Shuffle size={32} />
     }
   ];
 
@@ -227,27 +218,17 @@ const GraphPage: React.FC = () => {
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="relative h-40 sm:h-48 overflow-hidden">
-                <img 
-                  src={algo.image} 
-                  alt={algo.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex items-center mb-2">
-                    <div className={`p-2 rounded-full mr-2
-                                  ${theme === 'dark' 
-                                    ? 'bg-dark-primary/20 text-dark-primary' 
-                                    : 'bg-light-primary/20 text-light-primary'}`}>
-                      {algo.icon}
-                    </div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-4 rounded-full
+                                ${theme === 'dark' 
+                                  ? 'bg-dark-primary/20 text-dark-primary' 
+                                  : 'bg-light-primary/20 text-light-primary'}`}>
+                    {algo.icon}
                   </div>
-                  <h3 className="text-white text-lg sm:text-xl font-bold">{algo.name}</h3>
+                  <h3 className="text-xl font-bold ml-4">{algo.name}</h3>
                 </div>
-              </div>
-              
-              <div className="p-4 sm:p-6">
+                
                 <p className="mb-4 opacity-80 text-sm sm:text-base line-clamp-3">{algo.description}</p>
                 
                 {/* Complexity Badges */}

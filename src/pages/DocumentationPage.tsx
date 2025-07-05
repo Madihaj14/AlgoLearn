@@ -97,33 +97,6 @@ const DocumentationPage: React.FC = () => {
     return iconMap[topicId] || <Bookmark size={24} />;
   };
 
-  // Get background image for a topic
-  const getTopicImage = (topicId: string) => {
-    const imageMap: Record<string, string> = {
-      // Data Structures
-      'arrays': 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1036&q=80',
-      'linked-list': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2034&q=80',
-      'stack': 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
-      'queue': 'https://images.unsplash.com/photo-1621619856624-42fd193a0661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
-      'tree': 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80',
-      'graph': 'https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'hash-table': 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'heap': 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      
-      // Algorithms
-      'bubble-sort': 'https://images.unsplash.com/photo-1518281420975-50db6e5d0a97?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'quick-sort': 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'merge-sort': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2034&q=80',
-      'insertion-sort': 'https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'selection-sort': 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80',
-      'heap-sort': 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'binary-search': 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      'linear-search': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
-    };
-    
-    return imageMap[topicId] || 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
-  };
-
   return (
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
@@ -204,15 +177,9 @@ const DocumentationPage: React.FC = () => {
                   animate={{ scale: 1, y: 0 }}
                   exit={{ scale: 0.9, y: 20 }}
                 >
-                  {/* Header with background image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={getTopicImage(selectedDoc.id)} 
-                      alt={selectedDoc.title} 
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 p-6 flex items-center">
+                  {/* Header */}
+                  <div className="relative p-6 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center">
                       <div className={`p-3 rounded-full mr-4
                                     ${theme === 'dark' 
                                       ? 'bg-dark-primary/30 text-dark-primary' 
@@ -220,13 +187,13 @@ const DocumentationPage: React.FC = () => {
                         {getTopicIcon(selectedDoc.id)}
                       </div>
                       <div>
-                        <h2 className="text-3xl font-bold text-white">{selectedDoc.title}</h2>
-                        <p className="text-white/80">{selectedDoc.description}</p>
+                        <h2 className="text-3xl font-bold">{selectedDoc.title}</h2>
+                        <p className="opacity-80">{selectedDoc.description}</p>
                       </div>
                     </div>
                     <button 
                       onClick={() => setSelectedDoc(null)}
-                      className="absolute top-4 right-4 p-2 rounded-full bg-black/30 text-white hover:bg-black/50"
+                      className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10"
                     >
                       <X size={24} />
                     </button>
@@ -428,24 +395,17 @@ const DocumentationPage: React.FC = () => {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleTopicClick(topic.id)}
                     >
-                      <div className="relative h-40 overflow-hidden">
-                        <img 
-                          src={getTopicImage(topic.id)} 
-                          alt={topic.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div className="absolute bottom-4 left-4">
-                          <div className="flex items-center mb-2">
-                            <div className={`p-2 rounded-full mr-2 bg-white/20 text-white`}>
-                              {getTopicIcon(topic.id)}
-                            </div>
+                      <div className="p-6">
+                        <div className="flex items-center mb-4">
+                          <div className={`p-4 rounded-full
+                                        ${theme === 'dark' 
+                                          ? 'bg-dark-primary/20 text-dark-primary' 
+                                          : 'bg-light-primary/20 text-light-primary'}`}>
+                            {getTopicIcon(topic.id)}
                           </div>
-                          <h3 className="text-white text-lg font-bold">{topic.title}</h3>
+                          <h3 className="text-xl font-bold ml-4">{topic.title}</h3>
                         </div>
-                      </div>
-                      
-                      <div className="p-4">
+                        
                         <p className="mb-4 opacity-80 text-sm line-clamp-2">{topic.description}</p>
                         <div className="flex justify-between items-center">
                           <span className={`text-xs px-2 py-1 rounded-full
@@ -513,24 +473,17 @@ const DocumentationPage: React.FC = () => {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleTopicClick(topic.id)}
                     >
-                      <div className="relative h-40 overflow-hidden">
-                        <img 
-                          src={getTopicImage(topic.id)} 
-                          alt={topic.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div className="absolute bottom-4 left-4">
-                          <div className="flex items-center mb-2">
-                            <div className={`p-2 rounded-full mr-2 bg-white/20 text-white`}>
-                              {getTopicIcon(topic.id)}
-                            </div>
+                      <div className="p-6">
+                        <div className="flex items-center mb-4">
+                          <div className={`p-4 rounded-full
+                                        ${theme === 'dark' 
+                                          ? 'bg-dark-primary/20 text-dark-primary' 
+                                          : 'bg-light-primary/20 text-light-primary'}`}>
+                            {getTopicIcon(topic.id)}
                           </div>
-                          <h3 className="text-white text-lg font-bold">{topic.title}</h3>
+                          <h3 className="text-xl font-bold ml-4">{topic.title}</h3>
                         </div>
-                      </div>
-                      
-                      <div className="p-4">
+                        
                         <p className="mb-4 opacity-80 text-sm line-clamp-2">{topic.description}</p>
                         <div className="flex justify-between items-center">
                           <div className="flex items-center">
@@ -579,24 +532,17 @@ const DocumentationPage: React.FC = () => {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleTopicClick(topic.id)}
                     >
-                      <div className="relative h-40 overflow-hidden">
-                        <img 
-                          src={getTopicImage(topic.id)} 
-                          alt={topic.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div className="absolute bottom-4 left-4">
-                          <div className="flex items-center mb-2">
-                            <div className={`p-2 rounded-full mr-2 bg-white/20 text-white`}>
-                              {getTopicIcon(topic.id)}
-                            </div>
+                      <div className="p-6">
+                        <div className="flex items-center mb-4">
+                          <div className={`p-4 rounded-full
+                                        ${theme === 'dark' 
+                                          ? 'bg-dark-primary/20 text-dark-primary' 
+                                          : 'bg-light-primary/20 text-light-primary'}`}>
+                            {getTopicIcon(topic.id)}
                           </div>
-                          <h3 className="text-white text-lg font-bold">{topic.title}</h3>
+                          <h3 className="text-xl font-bold ml-4">{topic.title}</h3>
                         </div>
-                      </div>
-                      
-                      <div className="p-4">
+                        
                         <p className="mb-4 opacity-80 text-sm line-clamp-2">{topic.description}</p>
                         <div className="flex justify-between items-center">
                           <div className="flex items-center">
