@@ -399,22 +399,22 @@ const DocumentationPage: React.FC = () => {
                         <div className="flex items-center mb-4">
                           <div className={`p-4 rounded-full
                                         ${theme === 'dark' 
-                                          ? 'bg-dark-primary/20 text-dark-primary' 
+                                          ? 'bg-dark-primary/20 text-dark-primary text-white' 
                                           : 'bg-light-primary/20 text-light-primary'}`}>
                             {getTopicIcon(topic.id)}
                           </div>
                           <h3 className="text-xl font-bold ml-4">{topic.title}</h3>
                         </div>
                         
-                        <p className="mb-4 opacity-80 text-sm line-clamp-2">{topic.description}</p>
+                        <p className="mb-4 opacity-80 text-sm line-clamp-2" style={{ color: theme === 'dark' ? '#FFFFFF' : 'inherit' }}>{topic.description}</p>
                         <div className="flex justify-between items-center">
                           <span className={`text-xs px-2 py-1 rounded-full
                                         ${theme === 'dark'
-                                          ? 'bg-dark-primary/20 text-dark-primary'
+                                          ? 'bg-dark-primary/20 text-dark-primary text-white'
                                           : 'bg-light-primary/20 text-light-primary'}`}>
                             {dataStructuresContent[topic.id] ? 'Data Structure' : 'Algorithm'}
                           </span>
-                          <span className="text-sm flex items-center">
+                          <span className="text-sm flex items-center" style={{ color: theme === 'dark' ? '#FFFFFF' : 'inherit' }}>
                             View <ArrowRight size={14} className="ml-1" />
                           </span>
                         </div>

@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
           {/* About Section */}
           <div>
             <h3 className={`text-lg font-semibold mb-4 
-                          ${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'}`}>
+                          ${theme === 'dark' ? 'text-dark-heading' : 'text-light-primary'}`}>
               AlgoLearn
             </h3>
             <p className="mb-4 opacity-80">
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           {/* Quick Links */}
           <div>
             <h3 className={`text-lg font-semibold mb-4 
-                          ${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'}`}>
+                          ${theme === 'dark' ? 'text-dark-heading' : 'text-light-primary'}`}>
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
           {/* Resources */}
           <div>
             <h3 className={`text-lg font-semibold mb-4 
-                          ${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'}`}>
+                          ${theme === 'dark' ? 'text-dark-heading' : 'text-light-primary'}`}>
               Resources
             </h3>
             <ul className="space-y-2">

@@ -68,6 +68,7 @@ const HomePage: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ color: theme === 'dark' ? '#FFFFFF' : 'inherit' }}
             >
               Visualize data structures and algorithms in an interactive cosmic environment. 
               Learn, practice, and master DSA concepts with AlgoLearn.
@@ -114,11 +115,12 @@ const HomePage: React.FC = () => {
                 <div className={`inline-flex p-3 rounded-full mb-3
                               ${theme === 'dark' 
                                 ? 'bg-dark-primary/20 text-dark-primary' 
-                                : 'bg-light-primary/20 text-light-primary'}`}>
+                                : 'bg-light-primary/20 text-light-primary'}`}
+                   style={{ color: theme === 'dark' ? '#00FFFF' : 'inherit' }}>
                   {stat.icon}
                 </div>
                 <div className="text-2xl sm:text-3xl font-bold mb-1">{stat.value}</div>
-                <div className="text-sm opacity-80">{stat.label}</div>
+                <div className="text-sm opacity-80" style={{ color: theme === 'dark' ? '#FFFFFF' : 'inherit' }}>{stat.label}</div>
               </motion.div>
             ))}
           </div>

@@ -862,7 +862,7 @@ const PracticePage: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <h1 className={`text-4xl font-bold mb-4
-                        ${theme === 'dark' ? 'text-dark-text' : 'text-light-text'}`}>
+                        ${theme === 'dark' ? 'text-dark-heading' : 'text-light-text'}`}>
             Practice Problems
           </h1>
           <p className="text-xl max-w-3xl mx-auto opacity-80">
@@ -877,29 +877,27 @@ const PracticePage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className={`card card-glass p-4 text-center
-                        ${theme === 'dark' ? 'bg-dark-surface' : 'bg-light-surface'}`}>
-            <div className="text-2xl font-bold">{stats.completed}/{stats.total}</div>
+          <div className={`card card-glass p-4 text-center ${theme === 'dark' ? 'bg-dark-surface/80' : 'bg-light-surface'}`}>
+            <div className={`text-2xl font-bold ${theme === 'dark' ? 'text-dark-heading' : ''}`}>{stats.completed}/{stats.total}</div>
             <div className="text-sm opacity-80">Completed</div>
           </div>
-          <div className={`card card-glass p-4 text-center text-green-500`}>
+          <div className={`card card-glass p-4 text-center ${theme === 'dark' ? 'text-green-300' : 'text-green-500'}`}>
             <div className="text-2xl font-bold">{stats.easy}</div>
             <div className="text-sm">Easy</div>
           </div>
-          <div className={`card card-glass p-4 text-center text-yellow-500`}>
+          <div className={`card card-glass p-4 text-center ${theme === 'dark' ? 'text-yellow-300' : 'text-yellow-500'}`}>
             <div className="text-2xl font-bold">{stats.medium}</div>
             <div className="text-sm">Medium</div>
           </div>
-          <div className={`card card-glass p-4 text-center text-red-500`}>
+          <div className={`card card-glass p-4 text-center ${theme === 'dark' ? 'text-red-300' : 'text-red-500'}`}>
             <div className="text-2xl font-bold">{stats.hard}</div>
             <div className="text-sm">Hard</div>
           </div>
-          <div className={`card card-glass p-4 text-center
-                        ${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'}`}>
+          <div className="card card-glass p-4 text-center text-dark-primary">
             <div className="text-2xl font-bold">
               {Math.round((stats.completed / stats.total) * 100)}%
             </div>
-            <div className="text-sm">Progress</div>
+            <div className="text-sm text-gray-800 dark:text-white">Progress</div>
           </div>
         </motion.div>
         
@@ -1029,10 +1027,10 @@ const PracticePage: React.FC = () => {
                     <div className="flex items-center space-x-2 mt-1">
                       <span className={`text-sm px-2 py-1 rounded-full
                                     ${question.difficulty === 'Easy'
-                                      ? 'bg-green-500/20 text-green-500'
+                                      ? theme === 'dark' ? 'bg-green-500/20 text-green-300' : 'bg-green-500/20 text-green-500'
                                       : question.difficulty === 'Medium'
-                                        ? 'bg-yellow-500/20 text-yellow-500'
-                                        : 'bg-red-500/20 text-red-500'}`}>
+                                        ? theme === 'dark' ? 'bg-yellow-500/20 text-yellow-300' : 'bg-yellow-500/20 text-yellow-500'
+                                        : theme === 'dark' ? 'bg-red-500/20 text-red-300' : 'bg-red-500/20 text-red-500'}`}>
                         {question.difficulty}
                       </span>
                       <span className={`text-sm px-2 py-1 rounded-full
@@ -1050,10 +1048,7 @@ const PracticePage: React.FC = () => {
                     href={question.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`transition-colors duration-300 text-sm
-                              ${theme === 'dark'
-                                ? 'text-dark-primary hover:text-dark-primary/80'
-                                : 'text-light-primary hover:text-light-primary/80'}`}
+                    className={`transition-colors duration-300 text-sm ${theme === 'dark' ? 'text-dark-accent hover:text-dark-accent/80' : 'text-light-primary hover:text-light-primary/80'}`}
                   >
                     Solve
                   </a>

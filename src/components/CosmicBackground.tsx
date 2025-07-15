@@ -322,6 +322,7 @@ const CosmicBackground: React.FC = () => {
                     duration: bird.wingSpeed,
                     repeat: Infinity,
                     ease: "easeInOut",
+                    opacity: [1, 0.95, 0.9, 0.95, 1]
                   }}
                 >
                   {/* Bird body */}

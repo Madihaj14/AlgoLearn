@@ -6,18 +6,21 @@ export default {
     extend: {
       colors: {
         // Light mode colors
-        'light-primary': '#8A2BE2',
+        'light-primary': '#1E40AF',
         'light-secondary': '#4169E1',
         'light-background': '#F0F8FF',
         'light-surface': 'rgba(255, 255, 255, 0.8)',
         'light-text': '#2C3E50',
         
         // Dark mode colors - improved for readability
-        'dark-primary': '#00FFFF',
+        'dark-primary': '#64FFDA',
         'dark-secondary': '#FF00FF',
         'dark-background': '#0A0A29',
         'dark-surface': 'rgba(30, 30, 60, 0.8)',
         'dark-text': '#FFFFFF',
+        'dark-heading': '#8BE9FD',
+        'dark-subheading': '#BD93F9',
+        'dark-accent': '#FF79C6',
       },
       fontFamily: {
         sans: ['Lato', 'sans-serif'],

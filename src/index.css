@@ -83,11 +83,40 @@
 
 /* Improved dark mode text readability */
 .dark .opacity-80 {
-  @apply opacity-90;
+  @apply opacity-90 text-gray-100 !important;
 }
 
 .dark p, .dark span, .dark li {
-  @apply text-white;
+  @apply text-gray-100 !important;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark div {
+  @apply text-gray-100 !important;
+}
+
+.dark .card, .dark .card-glass {
+  @apply text-gray-100;
+}
+
+/* Custom heading colors for dark mode */
+.dark h1 {
+  @apply text-dark-heading !important;
+}
+
+.dark h2 {
+  @apply text-dark-heading !important;
+}
+
+.dark h3 {
+  @apply text-dark-subheading !important;
+}
+
+.dark .card-title {
+  @apply text-dark-heading !important;
+}
+
+.dark .btn-accent {
+  @apply bg-dark-accent text-dark-background hover:bg-dark-accent/90 !important;
 }
 
 /* Bird animation */

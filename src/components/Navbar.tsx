@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
                 className={`transition-all duration-300 hover:text-light-primary dark:hover:text-dark-primary
                           px-3 py-2 rounded-lg hover:bg-light-primary/10 dark:hover:bg-dark-primary/10
                           ${isActive(link.path) 
-                            ? 'text-light-primary dark:text-dark-primary font-medium bg-light-primary/10 dark:bg-dark-primary/10' 
+                            ? 'text-light-primary dark:text-dark-accent font-medium bg-light-primary/10 dark:bg-dark-primary/10' 
                             : ''}`}
               >
                 {link.name}
