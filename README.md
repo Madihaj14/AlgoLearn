@@ -23,7 +23,7 @@
 🎯 **Visual Learning** – See DSA concepts animated in real-time!  
 📚 **Comprehensive Documentation** – Master algorithms with clear explanations.  
 🎮 **Interactive Practice** – Solve curated problems from **LeetCode & GFG** directly.  
-🌗 **Space-Themed UI** – Dynamic light & dark modes for a cool learning experience.  
+🌗 **Space-Themed UI** – Dynamic light & dark modes for a fun learning experience.  
 🚀 **Constant Evolution** – The project is **still growing** with new features added daily!  
 
 ---
