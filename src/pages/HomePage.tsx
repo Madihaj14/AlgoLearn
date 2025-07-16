@@ -39,9 +39,9 @@ const HomePage: React.FC = () => {
   ];
 
   const stats = [
-    { icon: <Star size={20} />, value: '50+', label: 'Topics Covered' },
-    { icon: <Play size={20} />, value: '25+', label: 'Interactive Visualizations' },
-    { icon: <Users size={20} />, value: '1000+', label: 'Practice Problems' },
+    { icon: <Star size={20} />, value: '35+', label: 'Topics Covered' },
+    { icon: <Play size={20} />, value: '20+', label: 'Interactive Visualizations' },
+    { icon: <Users size={20} />, value: '100+', label: 'Practice Problems' },
     { icon: <Zap size={20} />, value: '100%', label: 'Free to Use' }
   ];
 
