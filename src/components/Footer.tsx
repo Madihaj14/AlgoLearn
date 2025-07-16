@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { Github, Twitter, Linkedin, Heart } from 'lucide-react';
+import { Github, Linkedin, Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const { theme } = useTheme();
@@ -12,9 +12,9 @@ const Footer: React.FC = () => {
                         : 'bg-light-background/90 text-light-text border-t border-light-primary/30'}`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About Section */}
-          <div>
-            <h3 className={`text-lg font-semibold mb-4 
+          {/* About Section - Left */}
+          <div className="flex flex-col items-start text-left">
+            <h3 className={`text-lg font-semibold mb-2
                           ${theme === 'dark' ? 'text-dark-heading' : 'text-light-primary'}`}>
               AlgoLearn
             </h3>
@@ -25,16 +25,15 @@ const Footer: React.FC = () => {
               <a href="https://github.com/Madihaj14" target="_blank" rel="noopener noreferrer" className={`hover:${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'} transition-colors duration-300`}>
                 <Github size={20} />
               </a>
-              
               <a href="https://www.linkedin.com/in/madiha-khan14/" target="_blank" rel="noopener noreferrer" className={`hover:${theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'} transition-colors duration-300`}>
                 <Linkedin size={20} />
               </a>
             </div>
           </div>
           
-          {/* Quick Links */}
-          <div>
-            <h3 className={`text-lg font-semibold mb-4 
+          {/* Quick Links - Center */}
+          <div className="flex flex-col items-center text-center">
+            <h3 className={`text-lg font-semibold mb-2
                           ${theme === 'dark' ? 'text-dark-heading' : 'text-light-primary'}`}>
               Quick Links
             </h3>
@@ -46,9 +45,9 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
-          {/* Resources */}
-          <div>
-            <h3 className={`text-lg font-semibold mb-4 
+          {/* Resources Section - Right */}
+          <div className="flex flex-col items-end text-right md:mr-8">
+            <h3 className={`text-lg font-semibold mb-2
                           ${theme === 'dark' ? 'text-dark-heading' : 'text-light-primary'}`}>
               Resources
             </h3>
