@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { Moon, Sun, Menu, X, Rocket } from 'lucide-react';
+import { Moon, Sun, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LogoLight from '../assets/Dark.svg';
+import LogoDark from '../assets/Light.svg';
 
 const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -43,42 +45,38 @@ const Navbar: React.FC = () => {
                     ${theme === 'dark' 
                       ? 'bg-dark-background/90 text-dark-text border-b border-dark-primary/30' 
                       : 'bg-light-background/80 text-light-text border-b border-light-primary/30'}`}>
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Rocket 
-                size={28} 
-                className={theme === 'dark' ? 'text-dark-primary' : 'text-light-primary'} 
-              />
-            </motion.div>
-            <span className="text-xl font-bold">AlgoLearn</span>
+      <div className="container mx-auto px-4 py-2">
+        <div className="flex items-center w-full">
+          {/* Logo + Text on extreme left */}
+          <Link to="/" className="flex items-center mr-8">
+            <img
+              src={theme === 'dark' ? LogoDark : LogoLight}
+              alt="AlgoLearn Logo"
+              className="h-8 w-8 mr-2"
+              style={{ objectFit: 'contain' }}
+            />
+            <span className="font-bold text-lg">AlgoLearn</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          {/* Centered Navigation Links */}
+          <div className="flex-1 flex items-center justify-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`transition-all duration-300 hover:text-light-primary dark:hover:text-dark-primary
-                          px-3 py-2 rounded-lg hover:bg-light-primary/10 dark:hover:bg-dark-primary/10
-                          ${isActive(link.path) 
-                            ? 'text-light-primary dark:text-dark-accent font-medium bg-light-primary/10 dark:bg-dark-primary/10' 
-                            : ''}`}
+                className={`font-bold transition-all duration-300 hover:text-light-primary dark:hover:text-dark-primary
+                  px-3 py-2 rounded-lg hover:bg-light-primary/10 dark:hover:bg-dark-primary/10
+                  ${isActive(link.path) 
+                    ? 'text-light-primary dark:text-dark-accent font-bold bg-light-primary/10 dark:bg-dark-primary/10' 
+                    : ''}`}
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          {/* Theme Toggle and Menu Button */}
-          <div className="flex items-center space-x-2">
+          {/* Theme Toggle and Menu Button - right */}
+          <div className="flex items-center space-x-2 justify-end">
             <motion.button
               onClick={toggleTheme}
               className="p-3 rounded-full transition-colors duration-300
