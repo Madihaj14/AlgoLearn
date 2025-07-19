@@ -16,7 +16,6 @@
 <p align="center">
   <img src="assets/visualization.gif" alt="AlgoLearn Visualization Demo">
 </p>
-
 ---
 
 ## 🌟 Why AlgoLearn?  
