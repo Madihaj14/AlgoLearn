@@ -12,9 +12,6 @@
 <p align="left">
   https://algolearn14.vercel.app
 </p>
-<p align="center">
-  <img src="assets/visualization.gif" alt="AlgoLearn Visualization Demo">
-</p>
 
 ---
 
