@@ -16,6 +16,8 @@
   <img src="assets/visualization.gif" alt="AlgoLearn Visualization Demo">
 </p>
 
+---
+
 ## 🌟 Why AlgoLearn?  
 🎯 **Visual Learning** – See DSA concepts animated in real-time!  
 📚 **Comprehensive Documentation** – Master algorithms with clear explanations.  
