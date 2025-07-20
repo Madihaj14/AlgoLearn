@@ -24,7 +24,7 @@
 
 ---
 
-## 🛠️ Tech Stack  
+## 🛠️ Tech Stack Used
 ✨ **Frontend:** React, Tailwind CSS  
 🛠️ **Backend:** Django/Flask, PostgreSQL  
 🔗 **API Integrations:** GPT API, LeetCode/GFG  
